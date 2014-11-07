@@ -5,7 +5,7 @@
  * Date: 02/10/14
  * Time: 23:38
  */
-class databases {
+class database {
     var $user = "root";
     var $password = "";
     var $host = "127.0.0.1";
