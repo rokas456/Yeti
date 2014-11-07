@@ -3,7 +3,7 @@
     // -- Class Name : crab
     // -- Purpose : 
     // -- Created On : 
-	class crab {
+	class webScrapper {
         var  $link; //Link from user to search
         var  $matchess;	// not sure
         var $srcs;		//Image srcs
