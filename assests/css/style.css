@@ -1,0 +1,224 @@
+*{
+
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #F9F9F9;
+
+}
+
+#header{
+    width: 100%;
+    height: 70px;
+
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background-color: #F9F9F9;
+
+
+}
+
+.div{
+    width: 100%;
+    height: 600px;
+
+}
+
+
+#home{
+
+    background-color: #F9F9F9;
+
+
+}
+#search{
+
+    height: 200px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+#center{
+position: absolute;
+   margin-top:  100px;
+
+}
+
+#IC{
+    border-bottom: 3px solid #FF5722;
+}
+
+
+
+#HTU{
+
+    border-bottom: 3px solid  #2196F3;
+}
+
+
+
+
+#IMS{
+
+    border-bottom: 3px solid #9C27B0;
+
+}
+
+
+
+#LS{
+    border-bottom: 3px solid #3F51B5;
+
+}
+
+#settings{
+
+    border-bottom: 3px solid  #9E9E9E;
+
+}
+
+
+
+@media only screen and (min-width: 0px) and (max-width: 639px) {
+
+
+
+    #menuButton {
+        width:45px;
+        height:45px;
+        float:right;
+        margin-right:10px;
+        background-image:url(../img/icons/menu.png);
+        background-size:cover;
+        cursor:pointer
+    }
+
+    #menuButtona {
+        width:45px;
+        height:45px;
+        float:right;
+        background-color:#E9E9E9;
+        margin-right:10px;
+        background-image:url(../img/icons/menu.png);
+        background-size:cover;
+        cursor:pointer
+    }
+
+    .menuItem {
+        float:right;
+        display:none
+    }
+
+    .menuItema {
+        float:right;
+        display:block
+    }
+
+    #menu {
+        text-decoration:none;
+        margin-top:5px;
+        list-style:none;
+        padding:0;
+        float:right;
+        height:auto;
+        width:100%
+    }
+
+    #menu li:Not(:first-child) {
+        background-color:#E9E9E9;
+        text-align:center;
+        font-family:'Roboto',sans-serif;
+        line-height:60px;
+        float:right;
+        width:100%;
+        height:60px
+    }
+
+    #menu li:Not(:first-child) a {
+        display:block;
+        color:#000;
+        box-shadow:0 2px 5px 0 rgba(0,0,0,0.26);
+        text-decoration:none
+    }
+    #menu li:Not(:first-child) a:hover {
+        display:block;
+        font-family:'Roboto',sans-serif;
+        color:#FF5722;
+        text-decoration:none
+    }
+
+
+
+}
+
+
+@media only screen and (min-width: 640px) and (max-width: 3639px) {
+
+
+
+
+#menuButton {
+    width:45px;
+    height:45px;
+    float:right;
+    margin-right:10px;
+    background-image:url(../img/icons/menu.png);
+    background-size:cover;
+    cursor:pointer
+}
+
+#menuButtona {
+    width:45px;
+    height:45px;
+    float:right;
+    margin-right:10px;
+    background-image:url(../img/icons/menu.png);
+    background-size:cover;
+    cursor:pointer
+}
+
+.menuItem {
+    display:none
+}
+
+.menuItema {
+    display:block
+}
+
+#menu {
+    text-decoration:none;
+    margin-top:5px;
+    list-style:none;
+    padding:0;
+    float:right;
+    height:auto;
+    width:auto
+}
+
+#menu li:Not(:first-child) {
+    margin-right:20px;
+    text-align:center;
+    line-height:45px;
+    float:left;
+    height:45px
+}
+
+#menu li:Not(:first-child) a {
+    display:block;
+    font-family:'Roboto',sans-serif;
+    color:#000;
+    text-decoration:none
+}
+
+#menu li:Not(:first-child) a:hover {
+    display:block;
+    font-family:'Roboto',sans-serif;
+    color:#FF5722;
+    text-decoration:none
+}
+}
