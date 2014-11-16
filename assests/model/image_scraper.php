@@ -3,12 +3,12 @@
     // -- Class Name : crab
     // -- Purpose : 
     // -- Created On : 
-	class imageScrapper {
+	class image_Scraper{
         var  $link; //Link from user to search
         var  $matchess;	// not sure
         var $srcs;		//Image srcs
         var $imageTypes;	// Image types
-
+        var $saveFolder =  'assests/img/download/';
 // -- Function Name : load
 // -- Params : $links
 // -- Purpose : 
@@ -87,7 +87,7 @@
             for($r=0;$r<= $count2-1;$r++ ){
                 echo $srcs[$r];
                 $ch = curl_init($srcs[$r]);
-                $fp = fopen('assests/img/' . $r ."." . $this->imageTypes[$r], 'wb');
+                $fp = fopen($this->saveFolder . $r ."." . $this->imageTypes[$r], 'wb');
                 curl_setopt($ch, CURLOPT_FILE, $fp);
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_exec($ch);
