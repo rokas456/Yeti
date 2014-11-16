@@ -1,75 +1,31 @@
-$(document).ready(function() {
+window.onload = function() {
 
-    $( ".orRegister" ).click(function() {
-     switchBetween();
-    });
-    
-     $( ".orSign" ).click(function() {
-switchBack();
-    });
-    
+	document.getElementById("menuButton").addEventListener('click', menuStyle,
+		false);
 
-    	function switchBetween()
-		{
-			$("#logIn").slideUp('slow', function(){
-			$("#register").slideDown('slow');});
-		}
-		function switchBack()
-		{
-			$("#register").slideUp('slow', function(){
-			$("#logIn").slideDown('slow');});
-		}
+};
 
-
-
-
-
-});
-
-
-
-/*
-
-
-
-
-
-
-
-
-$(document).ready(function(){
- 
-  
-    // imgReplace();
-    //moveOn();
-         
-});
- 
- 
-function imgReplace(){ // Replaces images with newer ones.
-  var oldSrc = 'http://example.com/smith.gif';
-var newSrc = 'http://assets2.ignimgs.com/2014/08/01/rszguardians-of-the-galaxy-photos-concept-art-fulljpg-8ddbc1_160w.jpg';
-$('img').attr('src', newSrc);
-     
+function menuStyle() {
+	var id = $("ul#menu li:first").get(0).id;
+	if (id == "menuButton") {
+		$("#menuButton").attr('id', 'menuButtona');
+		$(".menuItem").attr('class', 'menuItema');
+	} else {
+		$("#menuButtona").attr('id', 'menuButton');
+		$(".menuItema").attr('class', 'menuItem');
+	}
 }
- 
- 
-function moveOn(){
+
+
+function screenSizes(){
      
-        var w = window.innerWidth;  //gets users inner width of window
-        var h = window.innerHeight; //gets users inner height of window
+    var w = window.innerWidth;  //gets users inner width of window
+    var h = window.innerHeight; //gets users inner height of window
      
     // window.location.href = "assests/index.php?w=" + w +"&h=" + h; // Passes them onto the index file.
      
         
+
+
+    
 }
-
-
-
-
-
-*/
-
-
-
-
