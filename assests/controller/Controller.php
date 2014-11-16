@@ -82,6 +82,8 @@ class Controller {
     function image_Scraper(){
         
         $link = "http://imgur.com/r/buffy";
+        
+//        $link = $_GET['website'];
 
             $strip = new image_Scraper();        // Starts new crab instance
             $strip->load($link);        // Saves the link from user
