@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Install Yoursear.ch Os </title>
+    <title>yeti </title>
    <link rel="stylesheet" type="text/css" href="assests/css/style.css">
 
     <script type="text/javascript"src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
@@ -71,6 +71,71 @@
 
 
     <div class="div" id="IC">
+<?php
+
+
+    $titles = array();
+    $links = array();
+    $linksTitles = array();
+    $max = sizeof($titles);
+    $searchEngines = array('','','');
+    $html = file_get_contents('http://www.google.ie/search?q=' . 'facebook');
+
+$dom = new DOMDocument();
+@$dom->loadHTML($html);
+
+        // grab all the on the page
+        $xpath = new DOMXPath($dom);
+        $hrefs = $xpath->evaluate("/html/body//a");
+
+        $r = 0;
+        for ($i = 31; $i < $hrefs->length-29;  $i++) {
+        $href = $hrefs->item($i);
+        $url = $href->getAttribute('href');
+
+        $link_title = $href->nodeValue;
+        if(($link_title == 'Cached' )|| ($link_title  == 'Similar')){
+        }else{
+
+        $links[$r] = 'http://www.google.com' . $url;
+        $linksTitles[$r] = $link_title;
+        $r++;
+
+        }
+
+
+
+
+        }
+
+      $max = sizeof($linksTitles);
+   $max = sizeof($links);
+
+
+
+        for ($q= 0; $q<= $max-1; $q++){
+
+ echo "<a href='" . $links[$q]  . "'>" .$linksTitles[$q]  .  "</a>";
+echo '<br>';
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ?>
+
 
 
 

@@ -16,97 +16,81 @@ class linkscrapper{
 
 
 
+    var $titles = array();
+    var $links = array();
+    var $linksTitles = array();
+    var $searchEngines = array('','','');
+    var $searchTerm = '';
+
+
+
+
 
     // -- Function Name : __construct
     // -- Params : None
     // -- Purpose : Starts Database Connection
     public
-    function __construct() {
+    function __construct($term) {
             
-            $searchTerm = $_GET["search"];
-            $_SESSION['views'] = $searchTerm;
-                
-                if (empty($searchTerm)) {
-				    $searchTerm = "Projectbird";
-				    $this-> Yahoo($searchTerm);
-                    } else {
-				        $searchTerm = str_replace(" ", "+", $searchTerm);
-			             $this->Yahoo($searchTerm);
-                    }   
+        ///    $searchTerm = $_GET["search"];
+     echo   $this->searchTerm = $term;
     }
 
 
-    
+
+    public
+    function google($term){
 
 
 
-    
-public
-function getYahoo($searchTerm)
-{
 
-    
+        $html = file_get_contents('http://www.google.ie/search?q=' .    $term );
 
-				$yahooAddress = "http://m.yahoo.com/search?q=" . $searchTerm;
-				$yahoo_HTML   = file_get_contents($yahooAddress);
-				//Title------------------
-				preg_match('/<title>(.*)<\/title>/i', $yahoo_HTML, $title);
-				$title_out = $title[1];
-				// Results----------------
-			preg_match('/<li><a href="(.*)">(.*)<\/a><\/li>/i', $yahoo_HTML, $links);
-		
-// 			$yahooResultse = str_replace('href="', 'href="http://www.google.com', $links[0]);
-    
+        $dom = new DOMDocument();
+        @$dom->loadHTML($html);
 
+        // grab all the on the page
+        $xpath = new DOMXPath($dom);
+        $hrefs = $xpath->evaluate("/html/body//a");
 
-$yahooResults = "";//explode('<h3 class="r">',$yahooResultse);
-			 Google($searchTerm,$yahooResults);
-}
+        $r = 0;
+        for ($i = 31; $i < $hrefs->length-29;  $i++) {
+            $href = $hrefs->item($i);
+            $url = $href->getAttribute('href');
 
-public
-function Google($searchTerm,$yahooResults)
-{
-				$google_HTML = file_get_contents('http://www.google.ie/search?q=' . $searchTerm);
-				preg_match('/<title>(.*)<\/title>/i', $google_HTML, $title4);
-				$title_out4 = $title4[1];
-				preg_match('/<a href="(.*)">(.*)<\/a>/i', $google_HTML, $links4);
-   
-				$bodytag = str_replace('href="', 'href="http://www.google.com', $links4[0]);
-			
-				$pieces4 = explode('<h3 class="r">', $bodytag);
- bing($searchTerm,$yahooResults,$pieces4);
-		
+            $link_title = $href->nodeValue;
+            if(($link_title == 'Cached' )|| ($link_title  == 'Similar')){
+            }else{
 
-				
-}
+                $this->links[$r] = 'http://www.google.com' . $url;
+                $this->linksTitles[$r] = $link_title;
+                $r++;
+
+            }
 
 
-public
-function bing($searchTerm,$yahooResults,$pieces4)
-{
-		$bing_HTML = file_get_contents('http://m.bing.com/search?q='. $searchTerm);
-		
-		//<a href=
-	
-	//Title------------------
-		preg_match('/<title>(.*)<\/title>/i', $bing_HTML, $title3);
-		$title_out3 = $title3[1];
-		
-		preg_match('/<a href="(.*)">(.*)<\/a>/i' , $bing_HTML,$links3);
-		$bodytag = str_replace('href="', 'href="http://m.bing.com', $links3[0]);
-		$bodytag =  str_replace('class="ansDesc"',"",$bodytag );	
-	  $bodytag = str_replace('</a>', "", $bodytag);
-     
-    $bodytag = str_replace('<p >', "</a><p>", $bodytag);
-     $bodytag = str_replace('</p>', "</p><h4>", $bodytag);
-         $bodytag = str_replace('</li>', "</h4></li>", $bodytag);
-		$pieces3 = explode('<li class="ansMrgnB">', $bodytag);
 
-    include 'Results.html';
-    
+
+        }
+    }
+
+    public
+    function getGoogleLinks(){
+
+
+        $max = sizeof($this->titles);
+
+
+        for ($q= 0; $q<= $max-1; $q++){
+
+            echo "<a href='" . $this->links[$q]  . "'>" .$this->linksTitles[$q]  .  "</a>";
+            echo '<br>';
+        }
+
+
+    }
 
     
-}
 
     
     

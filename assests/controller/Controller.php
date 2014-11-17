@@ -12,6 +12,7 @@ class Controller {
     
     
     var $install;
+    var $link_Scrapper;
     var $filename = 'assests/settings/finished.ch';
     var $home = 'assests/view/home/index.html';
     
@@ -41,7 +42,8 @@ class Controller {
     function invoke(){
 
         if(file_exists($this->filename)){ //If the install file  is here welcome to home page.
-            
+         //   $this->link_Scrapper = new linkscrapper('term');
+
             include($this->home);
 
         } else {
