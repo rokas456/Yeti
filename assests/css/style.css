@@ -8,7 +8,7 @@ margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    background-color: #F9F9F9;
+    background-color: #F7F7F7;
 
 }
 
@@ -16,8 +16,8 @@ margin: 0;
     width: 100%;
     height: 70px;
 
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    background-color: #F9F9F9;
+    background-color: #F7F7F7;
+    border-top:4px solid #FFCE47;
 
 
 }
@@ -28,57 +28,47 @@ margin: 0;
 
 }
 
+input[type=search]{
+    height: 0;
+    border: 4px;
+width: 450px;
+    height: 46px;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
 
+}
 #home{
 
-    background-color: #F9F9F9;
+    background-color: #F7F7F7;
 
 
 }
 #search{
 
     height: 200px;
-    width: 200px;
+    width: 450px;
     margin-left: auto;
     margin-right: auto;
 
 }
+#logo{
+
+    width: 200px;
+    height: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 40px;
+}
+#searchForm{
+
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 450px;
+
+}
 #center{
-position: absolute;
-   margin-top:  100px;
-
-}
-
-#IC{
-    border-bottom: 3px solid #FF5722;
-}
 
 
-
-#HTU{
-
-    border-bottom: 3px solid  #2196F3;
-}
-
-
-
-
-#IMS{
-
-    border-bottom: 3px solid #9C27B0;
-
-}
-
-
-
-#LS{
-    border-bottom: 3px solid #3F51B5;
-
-}
-
-#settings{
-
-    border-bottom: 3px solid  #9E9E9E;
 
 }
 
