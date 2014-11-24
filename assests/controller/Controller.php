@@ -44,7 +44,18 @@ class Controller {
         if(file_exists($this->filename)){ //If the install file  is here welcome to home page.
          //   $this->link_Scrapper = new linkscrapper('term');
 
+            
+               if(isset($_GET['search'])){
+                   
+                   $term = $_POST["search"];
+                             $this->link_Scrapper = new linkscrapper($term);
+                         echo $this->link_Scrapper->google($term);
+                                echo $this->link_Scrapper->bing($term);
+                              include('assests/view/result/index.php');
+                            }else{
+            
             include($this->home);
+               }
 
         } else {
 
