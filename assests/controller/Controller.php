@@ -5,6 +5,7 @@ require_once("assests/model/database.php");
 require_once("assests/model/image_compression.php");
 require_once("assests/model/image_scraper.php");
 require_once("assests/model/link_scrapper.php");
+require_once("assests/model/twitter/twitter.php");
 
 
 
@@ -12,6 +13,7 @@ class Controller {
     
     
     var $install;
+      var $twitter;
     var $link_Scrapper;
     var $filename = 'assests/settings/finished.ch';
     var $home = 'assests/view/home/index.html';
@@ -27,6 +29,7 @@ class Controller {
         session_start();
 
         $this->install = new installModel();
+        $this->twitter = new twitter();
     
     }
     
@@ -42,7 +45,7 @@ class Controller {
     function invoke(){
 
         if(file_exists($this->filename)){ //If the install file  is here welcome to home page.
-         //   $this->link_Scrapper = new linkscrapper('term');
+      // $this->link_Scrapper = new linkscrapper('term');
 
             
                if(isset($_GET['search'])){
@@ -51,6 +54,8 @@ class Controller {
                              $this->link_Scrapper = new linkscrapper($term);
                          echo $this->link_Scrapper->google($term);
                                 echo $this->link_Scrapper->bing($term);
+                             echo $this->twitter->postTweet($term);
+                          
                               include('assests/view/result/index.php');
                             }else{
             
