@@ -41,7 +41,7 @@
 		public
 		function google($term){
 			$max = sizeof($this->titles);
-			$html = file_get_contents('http://www.google.ie/search?q=' . $term);
+			$html = file_get_contents('http://www.google.ie/search?q=' . $this->buildString($term));
 			$dom = new DOMDocument();
 			@$dom->loadHTML($html);
 			// grab all the on the page
@@ -82,7 +82,7 @@
 		function bing($term)        {
             
             
-			$html = file_get_contents('http://www.bing.com/search?q=' . $term);
+			$html = file_get_contents('http://www.bing.com/search?q=' . $this->buildString($term));
 			$dom = new DOMDocument();
 			@$dom->loadHTML($html);
 			// grab all the on the page
@@ -115,7 +115,12 @@
 		}
         
         
-        
+        public
+        function buildString($term){
+            
+           return str_replace(" ","+",$term);
+            
+        }
         
 
 	}
