@@ -1,0 +1,59 @@
+body{
+    height: 100%;
+background-color:  #F7F7F7   ;
+}
+
+
+#banner{
+    background-color: #9FEBE9;
+ height: 400px;   
+    background-image: url('/assests/img/background.jpg');
+
+}
+
+#nav{
+    
+ border-radius: 0;
+    background-color:#FFCE47;
+    border-color: #FFCE47;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+
+}
+
+.active{
+    background-color:#FFCE47;
+    
+}
+
+#bannerMiddle{
+ margin-top: 25px;
+
+    height: 100%;
+    
+}
+
+#search{
+ 
+ height: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: blue;
+    
+}
+#searchInput{
+ border-radius: 0;
+    height: 50px;
+    border: 0;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    
+}
+
+
+.form-control {
+   
+    width:100%;
+}
+#searchRow{
+margin-top: 30px;    
+    
+}
