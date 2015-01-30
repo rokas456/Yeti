@@ -13,7 +13,7 @@ class Controller {
     
     
     var $install;
-      var $twitter;
+    var $twitter;
     var $link_Scrapper;
     var $filename = 'assests/settings/finished.ch';
     var $home = 'assests/view/home/index.html';
@@ -45,22 +45,22 @@ class Controller {
     function invoke(){
 
         if(file_exists($this->filename)){ //If the install file  is here welcome to home page.
-      // $this->link_Scrapper = new linkscrapper('term');
 
-            
                if(isset($_GET['search'])){
                    
-                   $term = $_POST["search"];
-                             $this->link_Scrapper = new linkscrapper($term);
-                         echo $this->link_Scrapper->google($term);
-                                echo $this->link_Scrapper->bing($term);
-                             echo $this->twitter->postTweet($term);
-                          
-                              include('assests/view/result/index.php');
-                            }else{
             
-            include($this->home);
-               }
+                    $this->link_Scrapper = new linkscrapper($_POST["search"]);
+                    $this->link_Scrapper->google();
+                    $this->link_Scrapper->bing();
+                    $this->twitter->postTweet($_POST["search"]);
+                          
+                    include('assests/view/result/index.php');
+                
+                }else{
+            
+                    include($this->home);
+                
+                }
 
         } else {
 

@@ -1,4 +1,5 @@
 <?php
+	
 	//-------------Details---------------\\
 	// @Author : Robert Gabriel
 	// @Version : 1.0
@@ -10,13 +11,15 @@
 
 	class linkscrapper{
         
+        var $searchTerm = null;
         
-		var     $titles = array();
-		var     $links = array();
-		var     $linksTitles = array();
-		var     $titlesBing2 = array();
-		var     $linksBing2 = array();
-		var     $linksTitlesBing2 = array();
+		var $titles = array();
+		var $links = array();
+		var $linksTitles = array();
+
+		var $titlesBing2 = array();
+		var $linksBing2 = array();
+		var $linksTitlesBing2 = array();
         
         
         
@@ -31,7 +34,19 @@
 		}
 
         
-        
+        // -- Function Name : strip_Results
+		// -- Params : Search Term Url of the website
+		// -- Purpose : Strips urls to get links
+
+		public
+		function strip_Results($url){
+
+
+			return $results;
+		}
+
+
+
         
         
         // -- Function Name : google
@@ -40,8 +55,10 @@
         
 		public
 		function google($term){
+
 			$max = sizeof($this->titles);
-			$html = file_get_contents('http://www.google.ie/search?q=' . $this->buildString($term));
+
+			$html = file_get_contents('http://www.google.com/search?q=' . $this->buildString($term));
 			$dom = new DOMDocument();
 			@$dom->loadHTML($html);
 			// grab all the on the page
@@ -66,7 +83,6 @@
 			$max = sizeof($this->links);
 			for ($q= 0; $q<= $max-1; $q++){
 				echo "<a href='" . $this->links[$q]  . "'>" .$this->linksTitles[$q]  .  "</a>";
-				echo '<br>';
 			}
 
 		}
