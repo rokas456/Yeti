@@ -1,15 +1,8 @@
-<?php 
+<?php
 
-
-	include_once("assests/controller/controller.php");
-
-	$controller = new Controller();
-	$controller->invoke();
-
-
-
-
-
-
+    
+    include_once("assests/controller/controller.php");
+    $controller = new controller();
+    $controller->invoke();
 
 ?>

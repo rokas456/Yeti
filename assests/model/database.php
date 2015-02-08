@@ -1,125 +1,138 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: RobertGabriel
- * Date: 02/10/14
- * Time: 23:38
- */
-class database {
-    var $user = "root";
-    var $password = "";
-    var $host = "127.0.0.1";
-    var $database = "gym";
+
+
+class database{
+
+
+    var $username = "root";
+    var $password= "";
+    var $host = "localhost";
+    var $database = "yeti";
     var $con;
-    public function __construct() {
-        if (! isset ( $_SESSION )) {
-            session_start ();
-        }
-
-        $this->con = mysqli_connect ( $this->host, $this->user, $this->password, $this->database );
-
-        if (mysqli_connect_errno ()) {
-            echo "Failed to connect to MySQL: " . mysqli_connect_error ();
-        }
-    }
-    public function setWeight() {
-        $id = $_SESSION ["id"];
-
-        $mydate = getdate ( date ( "U" ) );
-
-        $date = $mydate [year] . $mydate [mon] . $mydate [mday];
-        $reps = $_POST ['reps'];
-        $weight = $_POST ['weight'];
-        $type = $_POST ['type'];
-
-        return mysqli_query ( $this->con, "INSERT INTO workout (memberId, date, exerciseType, reps,weight)
-VALUES ('" . $id . "','" . $date . "','" . $type . "','" . $reps . "','" . $weight . "')" );
-    }
-    public function __destruct() {
-        mysqli_close ( $this->con );
-    }
-    public function addStudent($fName, $lName, $studentId, $email, $password) {
-        return mysqli_query ( $this->con, "INSERT INTO members (CustomerName, ContactName, Address, City, PostalCode, Country)
-VALUES ('" . $fName . "','" . $lName . "','" . $studentId . "')" );
-    }
-    public function removeMember($memberId) {
-        return mysqli_query ( $this->con, 'DELETE FROM student WHERE memberId = {$memberId};' );
-    }
-    public function updateMember() {
-        $id = $_SESSION ["id"];
-        $fName = $_POST ['fname'];
-        $lName = $_POST ['lname'];
-        $address = $_POST ['address'];
-        $phone = $_POST ['phone'];
-        $email = $_POST ['email'];
-        $password = $_POST ['password'];
-
-        $results = mysqli_query ( $this->con, " UPDATE members
-SET fName='$fName', lName='$lName',address='$address',phone='$phone',email='$email',password='$password'
-WHERE memberId='$id';" );
-
-        return $results;
-    }
-    public function login($email, $password) {
-        $results = mysqli_query ( $this->con, "SELECT memberId,fName,lName,address,phone,email,password,height,status FROM members WHERE email='" . $email . "' AND password='" . $password . "'" );
-        return $results;
-    }
-    public function register($fName, $lName, $Id, $address, $phone, $email, $password) {
-        $results = mysqli_query ( $this->con, "INSERT INTO members (memberId,fName,lName,address,phone,email,password)
-VALUES ('$Id','$fName','$lName','$address','$phone','$email','$password')" );
-        return $results;
-    }
-    public function getTrainers() {
-        $results = mysqli_query ( $this->con, "SELECT * FROM members WHERE status = 2 " );
-        return $results;
-    }
-    public function colors() {
-        $id = $_SESSION ["id"];
-
-        $color = $_POST ['favcolor'];
-
-        $result = mysqli_query ( $this->con, "SELECT * FROM settings FROM memberId='$id'" );
-
-        echo $count = mysqli_num_rows ( $result );
-
-        if ($count == 1) {
-
-            $result = mysqli_query ( $this->con, "INSERT INTO settings (memberId,color) VALUES ('$id','$color')" );
-        } else {
-
-            $result = mysqli_query ( $this->con, " UPDATE settings SET color='$color' WHERE memberId='$id';" );
-        }
-    }
-    public function getdata() {
-        $results = mysqli_query ( $this->con, "Select * FROM workout where memberId = 'R00102430'" );
-
-        return $results;
-    }
-    public function getTraniersSchedule($s, $trainer) {
-
-        $results = mysqli_query ( $this->con, "SELECT *
-FROM members as m
-left outer  JOIN trainerschedule
-ON m.memberId=trainerschedule.trainerId
-LEFT OUTER JOIN schedules
-ON m.memberId = schedules.trainerId
-WHERE EXISTS (SELECT *
-              FROM trainerschedule as ts
-              WHERE m.status = 2 and ts.trainerId = m.memberId and ts.date = '$s') ORDER BY startTimes ;" );
-        return $results;
-    }
-
 
 
 
     public
-    function bookTrainer($trainer,$date,$time,$student){
+    function __construct()   {
+      
+        $this->con=mysqli_connect($this->host,$this->username,$this->password,$this->database);
 
-        $results = mysqli_query ( $this->con, "INSERT INTO schedules (date,startTimes,trainerId,studentId)
-VALUES ('$date','$time','$trainer','$student')" );
-        return $results;
+        if (mysqli_connect_errno()) {
+           
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        }
+    }
+
+
+    public
+    function __destruct(){
+
+        mysqli_close($this->con);
+    
+    }
+
+
+    public
+    function sign_in($email,$password){
+
+        $sql_query = "SELECT `id`,`name`,`email`,`password` FROM `users` WHERE email ='" . $email . "' AND password ='" . $password ."'";
+
+        return $this->runSQL($sql_query);
 
     }
+
+    public
+    function register_account($username,$email,$password){
+
+       
+       $sql_query = "INSERT INTO `users`(`name`, `email`, `password`) VALUES (
+       '" . $username  ."','" . $email  ."','" . $password  ."')";
+
+           $this->runSQL($sql_query);
+
+    }
+
+
+    public
+    function delete_account($username,$email){
+
+         $sql_query = "DELETE FROM users WHERE name='" . $username . "' AND email='" . $email ."'";
+
+         $this->runSQL($sql_query);
+
+    }
+
+    public
+    function update_account($username,$email,$password,$id){
+
+        $sql_query = "UPDATE users SET name='" . $username ."' AND email='" . $email ."' AND password='" . $password   ."' WHERE id='" . $id . "'";$sql_query = "UPDATE users SET name='" . $username ."' AND email='" . $email ."' AND password='" . $password   ."' WHERE id='" . $id . "'";
+        $this->runSQL($sql_query);
+
+    }
+
+
+    public
+    function count_amount_of_users(){
+ 
+        $sql_query = "SELECT count(id) as count FROM `users`";
+        
+        $result =$this->runSQL($sql_query);
+        $count = mysqli_fetch_array($result);
+        return  $count[0];
+    }
+
+    public 
+    function check_if_account_exists($email){
+        
+         $sql_query = "SELECT count(id)  FROM `users` where email='" . $email ."'";
+        $result =   $this->runSQL($sql_query);
+        
+        $count = mysqli_fetch_array($result);
+        return  $count[0];
+    }
+
+    
+    
+    public 
+        function add_search($searchterm, $id){
+  $sql_query = " INSERT INTO `searches`(`search_term`, `userID`, `date`, `time`) VALUES ('" .$searchterm ."','". $id ."','" . date("d-m-y") . "','" .   date("h:i:sa")."')";
+
+         $this->runSQL($sql_query);
+
+        
+       
+        
+    }
+    
+    
+    public 
+        function amount_of_searches(){
+
+          $sql_query = "SELECT Distinct count(date) as Number , date 
+                            FROM searches 
+                            GROUP BY date";
+        return  $this->runSQL($sql_query);
+    }
+
+        public
+    function count_amount_of_searches(){
+ 
+        $sql_query = "SELECT count(id) as count FROM `searches`";
+        
+        $result =$this->runSQL($sql_query);
+        $count = mysqli_fetch_array($result);
+        return  $count[0];
+    }
+    
+    
+    public
+    function runSQL($sql_query){
+
+       return  mysqli_query($this->con,$sql_query);
+
+
+    }
+
 }
 
 ?>

@@ -1,159 +1,167 @@
 <?php
 
-require_once("assests/model/installModel.php");
-require_once("assests/model/database.php");
-require_once("assests/model/image_compression.php");
-require_once("assests/model/image_scraper.php");
-require_once("assests/model/link_scrapper.php");
-require_once("assests/model/twitter/twitter.php");
-
-
+include_once("assests/model/user.php");
+include_once("assests/model/database.php");
+include_once("assests/model/search.php");
+include_once("assests/model/states.php");
 
 class Controller {
-    
-    
-    var $install;
-    var $twitter;
-    var $link_Scrapper;
-    var $filename = 'assests/settings/finished.ch';
-    var $home = 'assests/view/home/index.html';
-    
-    
-    
-    
-    
-    
-    public
-    function __construct()      {
-                
-        session_start();
 
-        $this->install = new installModel();
-        $this->twitter = new twitter();
+    var $user;
+    var $databae;
+    var $search;
+   
+    var $pasturl ;
+    
+
+    public
+    function __construct() {
+     
+        session_start();
+        $this->user = new user();
+        $this->search = new search();
+        $this->database = new database();
+         $this->states = new states();
+   //  $this->showErrors();
+    }
+
+
+    public 
+    function pastUrl(){
+        if(isset($_SERVER['HTTP_REFERER']))
+        {
+            $this->pasturl =$_SERVER['HTTP_REFERER'];
+            return $this->pasturl;
+        }
+    }
+
+
+
+    public
+    function showErrors(){
+
+        ini_set('display_errors',1);
+        ini_set('display_startup_errors',1);
+        error_reporting(-1);
     
     }
-    
-    
-    
-    
-    
-    
-    
+
+    public
+    function checkifAction(){
+        
+         $action ;
+                if(isset( $_GET['action'])){
+              $action =   $_GET['action'];
+                } else if(isset( $_GET['search'])){
+                      
+                    $action =   $_GET['search'];
+                    
+                }else {
+                 $action = 'home';    
+                }
+        
+        return $action;
+    }
     
 
     public
     function invoke(){
-
-        if(file_exists($this->filename)){ //If the install file  is here welcome to home page.
-
-               if(isset($_GET['search'])){
-                   
+        
+        $actions = $this->checkifAction();
+        
+        if(isset( $_SESSION['ID'])){
             
-                    $this->link_Scrapper = new linkscrapper($_POST["search"]);
-                    $this->link_Scrapper->google();
-                    $this->link_Scrapper->bing();
-                    $this->twitter->postTweet($_POST["search"]);
-                          
-                    include('assests/view/result/index.php');
+            if ((isset( $_GET['search'])) && ($actions != '')){
+             
+                  $this->search->add_search();// Adds search to database
+                  
+                 include_once('assests/view/results.html');
                 
-                }else{
+            }
+    
+            else if ($actions == 'home'){
+                // echo $_SESSION['ID'];
+                include_once('assests/view/results.html');
+                
+            }
+            else if($actions == 'logout')
+            {
+                
+                $this->user->logout();
+               $number_of_users =  $this->database->count_amount_of_users();
+                $number_of_searches = $this->database->count_amount_of_searches();
+                include_once('assests/view/signin.html');
             
-                    include($this->home);
-                
-                }
-
-        } else {
-
-            if(isset($_GET['second'])){
-
-                include('assests/view/install/2.html');
-
-                }else if(isset($_GET['third'])){
-
-                    $this->install->cookies();
-
-                    include('assests/view/install/3.html');
-                    }
-                        else if(isset($_GET['finished'])){
-
-                             $this->install->createDatabase();
-                        }
-                            else{
-                                include('assests/view/install/1.html');
-                            }
-        }
-
-    }
-    
-    
-    
-    public
-        function uninstall(){
-        
-     unlink($this->filename);   
-    }
-    
-    
-    
-    
-    public
-    function image_Scraper(){
-        
-        $link = "http://imgur.com/r/buffy";
-        
-//        $link = $_GET['website'];
-
-            $strip = new image_Scraper();        // Starts new crab instance
-            $strip->load($link);        // Saves the link from user
-            $strip->stripUrl();         // Starts to strip the url
-            $strip->getHTML_Contents(); //Gets the html contents of the requested url
-            $strip->stripSrc();         // Gets all images from the url
-            $strip->imageTypes();       // saves the images types 
-            $strip->saveImage();        // Saves the images locally to the folder
-        
-}   
-        
-        
-    
-    public 
-    function image_Compression(){ //Function for resizing the images to user screen
-        
-        
-    
-    $ImagesDirectory= 'assests/img/';   //Orgallioal img location
-    $DestImagesDirectory = 'assests/finished/'; //Finished image location
-
-    //$clientWidth = htmlspecialchars($_GET["w"]);  //  gets user width of screen
-    //$clientHeight = htmlspecialchars($_GET["h"]); // gets user height or screen
-
-    if($dir = opendir($ImagesDirectory)){   //Checks if the file is there in the folder
-    while(($file = readdir($dir))!== false){    //Loop though the folder for each image
-        
-        $imagePath = $ImagesDirectory.$file;        //Gets file orginal location
-        $destPath = $DestImagesDirectory.$file;     //Gets the file to save to
-        $checkValidImage = @getimagesize($imagePath); // Checks the image patch is there and gets size
-        
-        if(file_exists($imagePath) && $checkValidImage) //Continue only if 2 given parameters are true
-        {
-  
-            $image = new SimpleImage();             //Starts new yeti Image
-            $image->load( $ImagesDirectory.$file);  // Loads the image location
-            $image->scale(80);                      // Scales it to 80 percent
-       // $image->resize($clientWidth,$clientHeight);  //Resizes the images to the users screen size.
-            $image->save($DestImagesDirectory.$file); // Saves the file 
+            }
+               else if($actions == 'settings')
+            {
          
+                include_once('assests/view/setting.html');
+            
+            }
+            else if ($actions == 'getSearch_Chart'){
+                
+                
+                $this->states->search_chart();
+            }
+            else if($actions == 'charts')
+            {
+              
+            include_once('assests/view/charts.html');
+
+            }
+            else if ($actions == 'delete_account'){
+                
+            } 
+            else if($actions == 'update_account'){
+
+            }  else if($actions == 'search'){
+                
+         $this->search->add_search();
+                include_once('assests/view/results.html'); 
+            } 
+           
+                else {
+           include_once('assests/view/results.html');
+            }
+            
+        } else if ($actions == 'signin') {
+
+            $this->user->sign_in();
+
+        } else if($actions == 'signup'){
+    
+            include_once('assests/view/signup.html');
+        
         }
-    }    
-}
-}    
+        else if($actions == 'signinview'){
+                
+                  $number_of_searches = $this->database->count_amount_of_searches();
+            $number_of_users =  $this->database->count_amount_of_users();
+                include_once('assests/view/signin.html');
+        
+        } 
+             else if($actions == 'search'){
+                
+         
+                include_once('assests/view/results.html'); 
+        } 
         
         
-        
-        
-
-    
-    
-
+           else if($actions == 'register'){
+           
+              echo  $this->user->register_account();
+            
+            }
+     
+        else{
+                  $number_of_searches = $this->database->count_amount_of_searches();
+              $number_of_users =  $this->database->count_amount_of_users();
+         
+                include_once('assests/view/signin.html');
+            
+        }
+    }
 }
 
 ?>
