@@ -4,7 +4,7 @@ Yeti
 ![Screenshot 1](http://www.projectbird.com/uploads/6/0/3/3/603320/3733704_orig.png "Screenshot 1")
 
 
-Yeti is the image and video compression framework for web servers built in PHP and JavaScript. It also hopes to allow to bring all Social Apis under one roof for searching.
+Yeti is a framwork for the hackable search engine built in PHP and JavaScript. It also hopes to allow to bring all Social Apis under one roof for searching.
 
 
 Features
