@@ -63,14 +63,10 @@ class Controller {
         return $action;
     }
     
-
-    public
-    function invoke(){
-        
-        $actions = $this->checkifAction();
-        
-     if(isset( $_SESSION['ID'])){
-        switch ($actions) {
+public
+function signinedIn($actions)
+{
+     switch ($actions) {
             case "home":
                 include_once('assests/view/results.html');
                 break;
@@ -104,7 +100,13 @@ class Controller {
                 $number_of_users =  $this->database->count_amount_of_users();
                 include_once('assests/view/signin.html');
         }
-    }else {
+    
+}
+
+
+public 
+function NotSignedIn($actions){
+    
         switch ($actions) {
             case "signin":
                 $this->user->sign_in();
@@ -128,6 +130,18 @@ class Controller {
                 $number_of_users =  $this->database->count_amount_of_users();
                 include_once('assests/view/signin.html');
             }
+    
+}
+
+    public
+    function invoke(){
+        
+        $actions = $this->checkifAction();
+        
+        if(isset( $_SESSION['ID'])){
+       $this->signinedIn($actions);
+        }else {
+    $this->NotSignedIn($actions);
         }
     }
 }
