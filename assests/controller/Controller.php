@@ -69,97 +69,65 @@ class Controller {
         
         $actions = $this->checkifAction();
         
-        if(isset( $_SESSION['ID'])){
-            
-            if ((isset( $_GET['search'])) && ($actions != '')){
-             
-                  $this->search->add_search();// Adds search to database
-                  
-                 include_once('assests/view/results.html');
-                
-            }
-    
-            else if ($actions == 'home'){
-                // echo $_SESSION['ID'];
+     if(isset( $_SESSION['ID'])){
+        switch ($actions) {
+            case "home":
                 include_once('assests/view/results.html');
-                
-            }
-            else if($actions == 'logout')
-            {
-                
+                break;
+            case "logout":
                 $this->user->logout();
-               $number_of_users =  $this->database->count_amount_of_users();
+                $number_of_users =  $this->database->count_amount_of_users();
                 $number_of_searches = $this->database->count_amount_of_searches();
                 include_once('assests/view/signin.html');
-            
-            }
-               else if($actions == 'settings')
-            {
-         
+                break;
+            case "settings":
                 include_once('assests/view/setting.html');
-            
-            }
-            else if ($actions == 'getSearch_Chart'){
-                
-                
+                break;
+            case 'getSearch_Chart':
                 $this->states->search_chart();
-            }
-            else if($actions == 'charts')
-            {
-              
-            include_once('assests/view/charts.html');
-
-            }
-            else if ($actions == 'delete_account'){
-                
-            } 
-            else if($actions == 'update_account'){
-
-            }  else if($actions == 'search'){
-                
-         $this->search->add_search();
+                break;
+            case 'charts':
+                include_once('assests/view/charts.html');
+                break;
+            case 'delete_account':
+                # code...
+                break;
+            case 'update_account':
+                # code...
+                break;
+            case 'search':
+                $this->search->add_search();
                 include_once('assests/view/results.html'); 
-            } 
-           
-                else {
-           include_once('assests/view/results.html');
-            }
-            
-        } else if ($actions == 'signin') {
-
-            $this->user->sign_in();
-
-        } else if($actions == 'signup'){
-    
-            include_once('assests/view/signup.html');
-        
+                break;
+            default:
+                $number_of_searches = $this->database->count_amount_of_searches();
+                $number_of_users =  $this->database->count_amount_of_users();
+                include_once('assests/view/signin.html');
         }
-        else if($actions == 'signinview'){
-                
-                  $number_of_searches = $this->database->count_amount_of_searches();
-            $number_of_users =  $this->database->count_amount_of_users();
+    }else {
+        switch ($actions) {
+            case "signin":
+                $this->user->sign_in();
+                break;
+            case 'signup':
+                include_once('assests/view/signup.html');
+                break;
+            case 'signinview':
+                $number_of_searches = $this->database->count_amount_of_searches();
+                $number_of_users =  $this->database->count_amount_of_users();
                 include_once('assests/view/signin.html');
-        
-        } 
-             else if($actions == 'search'){
-                
-         
+                break;
+            case 'search':
                 include_once('assests/view/results.html'); 
-        } 
-        
-        
-           else if($actions == 'register'){
-           
-              echo  $this->user->register_account();
-            
-            }
-     
-        else{
-                  $number_of_searches = $this->database->count_amount_of_searches();
-              $number_of_users =  $this->database->count_amount_of_users();
-         
+                break;
+            case 'register':
+                echo  $this->user->register_account();
+                break;
+            default:
+                $number_of_searches = $this->database->count_amount_of_searches();
+                $number_of_users =  $this->database->count_amount_of_users();
                 include_once('assests/view/signin.html');
-            
+            }
         }
     }
 }
