@@ -21,7 +21,7 @@ function grabImages(tag, count, access_parameters) {
 }
 
 function onDataLoaded(instagram_data) {
-        var target = $("#target");
+        var target = $("#photos");
         //console.log(instagram_data);
         if (instagram_data.meta.code == 200) {
             var photos = instagram_data.data;
@@ -30,7 +30,7 @@ function onDataLoaded(instagram_data) {
                 target.empty();
                 for (var key in photos) {
                     var photo = photos[key];
-                    target.append('<div class="col-md-2"><a   class="thumbnail" href="' + photo.link + '"><img width="284" height="213" src="' +                                      photo.images.thumbnail.url + '"></a></div>')
+                    target.append('<li><div class="col-xs-6 col-md-3"><a href="' +  photo.link  + '" class="test"><img src="'+  photo.images.thumbnail.url  + '" alt="jj"></a></div></li>')
                 }
             } else {
                 target.html("nothing found");

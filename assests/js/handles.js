@@ -19,12 +19,10 @@ $("#signin").submit(function() {
 });
     
     
-    
-         
-// This is for the personal Settings
+    // This is for the personal Settings
 $("#search_bar").submit(function() {
 
-    var url =  "index.php?search=tiger"; // the script where you handle the form input.
+    var url =  "index.php?action=search"; // the script where you handle the form input.
     $.ajax({
            type: "POST",
         cache    : false,
@@ -32,18 +30,15 @@ $("#search_bar").submit(function() {
            data: $("#search_bar").serialize(), // serializes the form's elements.
            success: function(data)
            { 
-               
-            $.getScript("assests/third-party/instagram/instagram.js", function(){
-
+            $.getScript("http://localhost/yeti/assests/third-party/instagram/instagram.js", function(){
                 grabImages(jQuery("#search_bar_input").val(), 10, access_parameters);
-                    // Use anything defined in the loaded script...
-            });
+              });
            }
          });
-
-    
     return false; // avoid to execute the actual submit of the form.
 });
+    
+
     
    
 
