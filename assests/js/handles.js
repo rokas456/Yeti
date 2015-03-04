@@ -1,10 +1,10 @@
 $(function () {
-var url = 'http://localhost/';
+var url = '';
      
 // This is for the personal Settings
 $("#signin").submit(function() {
 
-    var url =  "http://localhost/index.php?action=signin"; // the script where you handle the form input.
+    var url =  "index.php?action=signin"; // the script where you handle the form input.
     $.ajax({
            type: "POST",
         cache    : false,
@@ -24,7 +24,7 @@ $("#signin").submit(function() {
 // This is for the personal Settings
 $("#search_bar").submit(function() {
 
-    var url =  "http://localhost/index.php?search=tiger"; // the script where you handle the form input.
+    var url =  "index.php?search=tiger"; // the script where you handle the form input.
     $.ajax({
            type: "POST",
         cache    : false,
@@ -49,7 +49,7 @@ $("#search_bar").submit(function() {
 
 // This is for the personal Settings
 $("#signup").submit(function() {
-  var url =  "http://localhost/index.php?action=register"; // the script where you handle the form input.
+  var url =  "index.php?action=register"; // the script where you handle the form input.
   
     $.ajax({
            type: "POST",
@@ -94,7 +94,7 @@ function alerts(status,message){
     
     function redirect(){
         
-        window.location ="http://localhost/index.php";
+        window.location ="index.php";
         
     }
     

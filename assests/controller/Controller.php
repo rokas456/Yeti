@@ -4,13 +4,13 @@ include_once("assests/model/user.php");
 include_once("assests/model/database.php");
 include_once("assests/model/search.php");
 include_once("assests/model/states.php");
+include("assests/model/settings.php");
 
 class Controller {
 
     var $user;
     var $databae;
     var $search;
-   
     var $pasturl ;
     
 
@@ -21,7 +21,7 @@ class Controller {
         $this->user = new user();
         $this->search = new search();
         $this->database = new database();
-         $this->states = new states();
+        $this->states = new states();
    //  $this->showErrors();
     }
 
@@ -68,22 +68,22 @@ function signinedIn($actions)
 {
      switch ($actions) {
             case "home":
-                include_once('assests/view/results.html');
+                include_once( WEBSITE_PATH . 'assests/view/results.html');
                 break;
             case "logout":
                 $this->user->logout();
                 $number_of_users =  $this->database->count_amount_of_users();
                 $number_of_searches = $this->database->count_amount_of_searches();
-                include_once('assests/view/signin.html');
+                include_once(WEBSITE_PATH . 'assests/view/signin.html');
                 break;
             case "settings":
-                include_once('assests/view/setting.html');
+                include_once(WEBSITE_PATH . 'assests/view/setting.html');
                 break;
             case 'getSearch_Chart':
                 $this->states->search_chart();
                 break;
             case 'charts':
-                include_once('assests/view/charts.html');
+                include_once(WEBSITE_PATH . 'assests/view/charts.html');
                 break;
             case 'delete_account':
                 # code...
@@ -93,12 +93,12 @@ function signinedIn($actions)
                 break;
             case 'search':
                 $this->search->add_search();
-                include_once('assests/view/results.html'); 
+                include_once(WEBSITE_PATH . 'assests/view/results.html'); 
                 break;
             default:
                 $number_of_searches = $this->database->count_amount_of_searches();
                 $number_of_users =  $this->database->count_amount_of_users();
-                include_once('assests/view/signin.html');
+                include_once(WEBSITE_PATH .'assests/view/signin.html');
         }
     
 }
@@ -117,7 +117,7 @@ function NotSignedIn($actions){
             case 'signinview':
                 $number_of_searches = $this->database->count_amount_of_searches();
                 $number_of_users =  $this->database->count_amount_of_users();
-                include_once('assests/view/signin.html');
+                include_once(WEBSITE_PATH . 'assests/view/signin.html');
                 break;
             case 'search':
                 include_once('assests/view/results.html'); 
@@ -128,7 +128,7 @@ function NotSignedIn($actions){
             default:
                 $number_of_searches = $this->database->count_amount_of_searches();
                 $number_of_users =  $this->database->count_amount_of_users();
-                include_once('assests/view/signin.html');
+                include_once(WEBSITE_PATH . 'assests/view/signin.html');
             }
     
 }

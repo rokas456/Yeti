@@ -1,16 +1,7 @@
 <?php
 
-$url_path = 'http://localhost/yeti/';
 
-
-
-
-//Database information
-
-
-
-
-
+define("WEBSITE_PATH","");
 
 
 
