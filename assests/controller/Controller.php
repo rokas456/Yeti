@@ -95,6 +95,9 @@ function signinedIn($actions)
                 $this->search->add_search();
                 include_once(WEBSITE_PATH . 'assests/view/results.html'); 
                 break;
+            case 'webresults':
+                $this->search->bing();
+                break;
             default:
                 $number_of_searches = $this->database->count_amount_of_searches();
                 $number_of_users =  $this->database->count_amount_of_users();
