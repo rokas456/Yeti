@@ -54,9 +54,9 @@ class database{
 
 
     public
-    function delete_account($username,$email){
+    function delete_account($email){
 
-         $sql_query = "DELETE FROM users WHERE name='" . $username . "' AND email='" . $email ."'";
+         $sql_query = "DELETE FROM users WHERE email='" . $email ."'";
 
          $this->runSQL($sql_query);
 

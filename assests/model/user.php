@@ -74,6 +74,8 @@
                 while($row = $results->fetch_assoc()){
                     $_SESSION["ID"] =  $row['id'];
                     $_SESSION["NAME"] =  $row['name'];
+                    $_SESSION["email"] =  $row['email'];
+                    
                 }
 
             }
@@ -112,6 +114,11 @@
 
         }
 
-    }
+public
+        function delete_account(){
+            $email = $_SESSION["email"];
+              $this->database->delete_account($email);
 
+    }
+}
     ?>
