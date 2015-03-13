@@ -43,8 +43,6 @@
         public
         function bing(){
 
-         //   $contents = file_get_contents('index.html');
-            echo $search_Term = $_POST['search_bar_input'];
             // Encode the query and the single quotes that must surround it.
             $query = urlencode("'{$_POST['search_bar_input']}'");
 
@@ -80,15 +78,27 @@
             $response = file_get_contents($requestUri, 0, $context);
 
             // Decode the response. 
-            $jsonObj = json_decode($response); $resultStr = ''; 
+            $jsonObj = json_decode($response); 
+            $resultStr = ''; 
             // Parse each result according to its metadata type. 
-            foreach($jsonObj->d->results as $value) { switch ($value->__metadata->type) { case 'WebResult': $resultStr .= "<a href=\"{$value->Url}\">{$value->Title}</a><p>{$value->Description}</p>"; break; case 'ImageResult': $resultStr .= "<h4>{$value->Title} ({$value->Width}x{$value->Height}) " . "{$value->FileSize} bytes)</h4>" . "<a href=\"{$value->MediaUrl}\">" . "<img src=\"{$value->Thumbnail->MediaUrl}\"></a><br />"; break; } } 
+            foreach($jsonObj->d->results as $value) { 
+
+                switch ($value->__metadata->type) { 
+                    case 'WebResult': 
+                        $resultStr .= "<ul class='nav nav-tabs nav-stacked well' ><li><h3><a href=\"{$value->Url}\">{$value->Title}</a></h3></li><li><h5><a href=\{$value->Url}\">{$value->Title}</a></h5></li><li><p>{$value->Description} </p></li><li><span class='label label-info'>Bing</span></li></ul>" ; 
+                        break; 
+                    case 'ImageResult':
+                        $resultStr .= "<h4>{$value->Title} ({$value->Width}x{$value->Height}) " . "{$value->FileSize} bytes)</h4>" . "<a href=\"{$value->MediaUrl}\">" . "<img src=\"{$value->Thumbnail->MediaUrl}\"></a><br />"; 
+                        break; 
+                    } 
+                } 
+
             // Substitute the results placeholder. Ready to go. 
            // $contents = str_replace('{RESULTS}', $resultStr, $contents);
 
-           echo $response;
+          
 
-          //  echo $resultStr;
+         echo $resultStr;
 
         }
 

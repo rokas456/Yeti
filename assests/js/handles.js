@@ -31,6 +31,7 @@ $("#search_bar").submit(function() {
            success: function(data)
            { 
             console.log(data);
+            myFunction(data);
             $.getScript("http://localhost/yeti/assests/third-party/instagram/instagram.js", function(){
                 grabImages(jQuery("#search_bar_input").val(), 10, access_parameters);
               });
@@ -87,6 +88,12 @@ function alerts(status,message){
  
     
     
+
+  function myFunction(data){
+    document.getElementById("webresults").innerHTML = data;
+}
+
+
     
     function redirect(){
         
