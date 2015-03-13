@@ -35,7 +35,7 @@
         function add_search(){
             
             $search_Term = $_POST['search_bar_input'];
-            $this->duckduckgo();
+            $this->bing($search_Term);
             $this->database->add_search($search_Term,$_SESSION['ID']);
         }
 
@@ -103,30 +103,6 @@
         }
 
 
-
-        public
-        function duckduckgo(){
-            $term = $_POST['search_bar_input'];
-
-            $response = file_get_contents("http://api.duckduckgo.com/?q=" . $term  ."&format=json" ,0); 
-            
-            $jsonObj = json_decode($response); 
-           
-            $resultStr = ''; 
-
-             echo $response.RelatedTopics.size;
-for ($x = 0; $x <= $jsonObj.RelatedTopics.length; $x++) {
-    echo "The number is: $x <br>";
-} 
-               
-                    
-                    
-
-            echo $response ;
-
-
-
-        }
     }
 
     ?>

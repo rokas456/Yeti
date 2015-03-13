@@ -96,8 +96,7 @@ function signinedIn($actions)
                 include_once(WEBSITE_PATH . 'assests/view/results.html'); 
                 break;
             case 'webresults':
-              //  $this->search->bing();
-                $this->search->duckduckgo();
+                $this->search->bing();
                 break;
             default:
                 $number_of_searches = $this->database->count_amount_of_searches();

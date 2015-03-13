@@ -30,9 +30,8 @@ $("#search_bar").submit(function() {
            data: $("#search_bar").serialize(), // serializes the form's elements.
            success: function(data)
            { 
-            console.log('s');
             console.log(data);
-          //  myFunction(data);
+            myFunction(data);
             $.getScript("http://localhost/yeti/assests/third-party/instagram/instagram.js", function(){
                 grabImages(jQuery("#search_bar_input").val(), 10, access_parameters);
               });
