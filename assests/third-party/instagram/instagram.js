@@ -1,12 +1,5 @@
 
 
-/*
-    <link rel="stylesheet" href="lightbox/lightbox/css/screen.css">
-    <link rel="stylesheet" href="lightbox/lightbox/css/lightbox.css">
-    <script type="text/javascript" src="lightbox/lightbox/js/lightbox.js"></script>
-
-<script type="text/javascript" src="instagram/instagram.js"></script>
-*/
 var access_token = "16384709.6ac06b4.49b97800d7fd4ac799a2c889f50f2587",
     access_parameters = {
         access_token: access_token
