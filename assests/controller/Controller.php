@@ -52,9 +52,9 @@ class Controller {
          $action ;
                 if(isset( $_GET['action'])){
               $action =   $_GET['action'];
-                } else if(isset( $_GET['search'])){
+                } else if(isset( $_GET['q'])){
                       
-                    $action =   $_GET['search'];
+                    $action =   $_GET['q'];
                     
                 }else {
                  $action = 'home';    
@@ -86,10 +86,11 @@ function signinedIn($actions)
                 include_once(WEBSITE_PATH . 'assests/view/charts.html');
                 break;
             case 'delete_account':
-                # code...
+                $this->user->delete_account();
+                $this->user->logout();
                 break;
             case 'update_account':
-                # code...
+                $this->user->update_account();
                 break;
             case 'search':
                 $this->search->add_search();
@@ -97,6 +98,7 @@ function signinedIn($actions)
                 break;
             case 'webresults':
                 $this->search->bing();
+                $this->search->add_search();
                 break;
             default:
                 $number_of_searches = $this->database->count_amount_of_searches();

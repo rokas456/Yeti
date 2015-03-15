@@ -1,7 +1,7 @@
 <?php
 
 
-	include_once("database.php");
+    include_once("database.php");
 
 // -- Class Name : user
 // -- Purpose : 
@@ -70,12 +70,13 @@
             // session_start();
             $count = mysqli_num_rows($results);
             
-            if($count==1){
+            if($count===1){
                 while($row = $results->fetch_assoc()){
                     $_SESSION["ID"] =  $row['id'];
                     $_SESSION["NAME"] =  $row['name'];
                     $_SESSION["email"] =  $row['email'];
-                    
+                    $_SESSION["twitter"] =  $row['twitter'];
+                    $_SESSION["password"] =  $row['password'];
                 }
 
             }
@@ -114,11 +115,24 @@
 
         }
 
-public
+        public
         function delete_account(){
             $email = $_SESSION["email"];
-              $this->database->delete_account($email);
+            $this->database->delete_account($email);
+        }
 
+        public
+        function update_account(){
+            $password = $_POST["password"];
+            $twitter =  $_POST["shareT"];
+            $this->database->update_account($password,$twitter);
+            $wasItChanged =  $this->database->check_if_password_changed($password);
+            if ($wasItChanged != '1' ){
+                echo 'error';
+            } else {
+                echo 'passwordchanged';
+
+            }
+        }
     }
-}
     ?>

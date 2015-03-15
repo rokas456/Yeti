@@ -1,7 +1,7 @@
 <?php
 
 	include_once("database.php");
-
+    include_once("assests/third-party/twitter/twitter.php");
 // -- Class Name : search
 // -- Purpose : 
 // -- Created On : 
@@ -9,6 +9,7 @@
         
         
         var $database;
+        var $twitter;
         var $acctKey = 'ch5yPPgveyknb+HrsD0Gow1UV5znc7ukV32Kd3WULd4';
         var $rootUri = 'https://api.datamarket.azure.com/Bing/Search';
 
@@ -23,7 +24,7 @@
         function __construct()   {
         
             $this->database =  new database();
-        
+            $this->twitter =  new twitter();
         }
 
         
@@ -36,8 +37,49 @@
             
             $search_Term = $_POST['search_bar_input'];
             $this->bing($search_Term);
+            $this->duckduckgo($search_Term);
             $this->database->add_search($search_Term,$_SESSION['ID']);
+
+            if ($_SESSION['twitter'] === '1'){
+
+                    $this->post_twitter();
+            }
+            
         }
+
+
+        public
+        function post_twitter(){
+
+            $this->twitter->postTweet($_POST['search_bar_input']);
+
+        }
+
+
+        public 
+        function duckduckgo($search_Term){
+            $requestUri = "http://api.duckduckgo.com/?q='$search_Term'&format=json";
+
+            $response = file_get_contents($requestUri, 0);
+
+            // Decode the response. 
+            $jsonObj = json_decode($response); 
+            $resultStr = ''; 
+     
+                $title = $jsonObj->Heading;
+                $url = $jsonObj->RelatedTopics[0]->FirstURL;
+               $text =$jsonObj->RelatedTopics[0]->Text;
+       
+                        $resultStr .= "<ul class='nav nav-tabs nav-stacked well' ><li><h3><a href='".   $url .  "'>" . $title.   "</a></h3></li><li><h5><a href='".   $url .  "'>" .$url.   "</a></h5></li><li><p>" .  $text  .   "</p></li><li><span class='label label-warning'>DuckDuckGo</span></li></ul>" ; 
+ 
+          
+            echo $resultStr;
+
+        }
+
+
+
+
 
 
         public

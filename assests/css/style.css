@@ -1,11 +1,23 @@
 body {
 
-background-color: #E2E2E2;
+background-color: #F7F7F7;
+border-top:5px solid #FFCE47;
+}
+
+.navbar-header{
+
+height:70px;
+
 
 }
 
+navbar-toggle {
 
-
-
-
+margin-top: 15px;
+}
+@media (min-width: 768px){
+.navbar-right {
+margin-top: 8px;
+}
+}
 
