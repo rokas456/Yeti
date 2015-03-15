@@ -1,15 +1,16 @@
 <?php
 
+
 include_once("assests/model/user.php");
 include_once("assests/model/database.php");
 include_once("assests/model/search.php");
 include_once("assests/model/states.php");
-include("assests/model/settings.php");
+include_once("assests/model/settings.php");
 
 class Controller {
 
     var $user;
-    var $databae;
+    var $database;
     var $search;
     var $pasturl ;
     
@@ -49,15 +50,16 @@ class Controller {
     public
     function checkifAction(){
         
-         $action ;
+         $action;
                 if(isset( $_GET['action'])){
               $action =   $_GET['action'];
                 } else if(isset( $_GET['search'])){
                       
                     $action =   $_GET['search'];
                     
-                }else {
-                 $action = 'home';    
+                } 
+                else {
+                 $action ='home';    
                 }
         
         return $action;
@@ -74,8 +76,11 @@ function signinedIn($actions)
                 $this->user->logout();
                 $number_of_users =  $this->database->count_amount_of_users();
                 $number_of_searches = $this->database->count_amount_of_searches();
+
                 include_once(WEBSITE_PATH . 'assests/view/signin.html');
+
                 break;
+
             case "settings":
                 include_once(WEBSITE_PATH . 'assests/view/setting.html');
                 break;
@@ -111,6 +116,11 @@ function NotSignedIn($actions){
             case "signin":
                 $this->user->sign_in();
                 break;
+
+            case 'about':
+                include_once('assests/view/about.html');
+                break;
+
             case 'signup':
                 include_once('assests/view/signup.html');
                 break;

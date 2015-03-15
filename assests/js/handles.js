@@ -33,6 +33,9 @@ $("#search_bar").submit(function() {
             $.getScript("http://localhost/yeti/assests/third-party/instagram/instagram.js", function(){
                 grabImages(jQuery("#search_bar_input").val(), 10, access_parameters);
               });
+            $.getScript("http://localhost/yeti/assests/third-party/rottentomatoes/rottenTomatoes.js", function(){
+                getMovies(jQuery("#search_bar_input").val(), 5);
+              });
            }
          });
     return false; // avoid to execute the actual submit of the form.

@@ -1,3 +1,5 @@
+
+
 var access_token = "16384709.6ac06b4.49b97800d7fd4ac799a2c889f50f2587",
     access_parameters = {
         access_token: access_token
@@ -30,7 +32,7 @@ function onDataLoaded(instagram_data) {
                 target.empty();
                 for (var key in photos) {
                     var photo = photos[key];
-                    target.append('<li><div class="col-xs-6 col-md-3"><a href="' +  photo.link  + '" class="test"><img src="'+  photo.images.thumbnail.url  + '" alt="jj"></a></div></li>')
+                    target.append('<li><div class="col-xs-6 col-md-3"><a  href="' +  photo.link  + '" ><img src="'+  photo.images.thumbnail.url  + '" alt="jj"></a></div></li>')
                 }
             } else {
                 target.html("nothing found");
