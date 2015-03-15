@@ -38,6 +38,7 @@
             $search_Term = $_POST['search_bar_input'];
             $this->bing($search_Term);
             $this->duckduckgo($search_Term);
+            $this->google($search_Term);
             $this->database->add_search($search_Term,$_SESSION['ID']);
 
             if ($_SESSION['twitter'] === '1'){
@@ -73,6 +74,30 @@
                         $resultStr .= "<ul class='nav nav-tabs nav-stacked well' ><li><h3><a href='".   $url .  "'>" . $title.   "</a></h3></li><li><h5><a href='".   $url .  "'>" .$url.   "</a></h5></li><li><p>" .  $text  .   "</p></li><li><span class='label label-warning'>DuckDuckGo</span></li></ul>" ; 
  
           
+            echo $resultStr;
+
+        }
+
+
+
+        public
+        function google($search_Term){
+
+            $query = $search_Term;
+            $url = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=".$query;
+
+            $body = file_get_contents($url,0);
+            $json = json_decode($body);
+    $resultStr = '';
+            for($x=0;$x<count($json->responseData->results);$x++){
+            
+
+                $resultStr .= "<ul class='nav nav-tabs nav-stacked well' ><li><h3><a href='".   $json->responseData->results[$x]->url .  "'>" . $json->responseData->results[$x]->title.   "</a></h3></li><li><h5><a href='".    $json->responseData->results[$x]->visibleUrl .  "'>" . $json->responseData->results[$x]->visibleUrl.   "</a></h5></li><li><p>" .  $json->responseData->results[$x]->content  .   "</p></li><li><span class='label label-success'>Google</span></li></ul>" ; 
+ 
+     
+
+            }
+
             echo $resultStr;
 
         }
