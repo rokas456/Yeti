@@ -24,7 +24,7 @@ $(function() {
 				text : 'Number of Searches per day '
 			},
 			subtitle : {
-				text : 'Search stats'
+				text : 'Yeti by Projectbird'
 			},
 			xAxis : {
 				title : {
