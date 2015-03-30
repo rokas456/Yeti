@@ -4,7 +4,7 @@ include_once("assests/model/user.php");
 include_once("assests/model/database.php");
 include_once("assests/model/search.php");
 include_once("assests/model/states.php");
-include("assests/model/settings.php");
+include_once("assests/model/settings.php");
 
 class Controller {
 

@@ -118,7 +118,8 @@
         public
         function delete_account(){
             $email = $_SESSION["email"];
-            $this->database->delete_account($email);
+            $username = $_SESSION["NAME"];
+            $this->database->delete_account($username,$email);
         }
 
         public
@@ -131,7 +132,6 @@
                 echo 'error';
             } else {
                 echo 'passwordchanged';
-
             }
         }
     }

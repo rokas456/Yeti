@@ -35,7 +35,7 @@ class database{
     public
     function sign_in($email,$password){
 
-        $sql_query = "SELECT `id`,`name`,`email`,`password` ,`twitter` FROM `users` WHERE email ='" . $email . "' AND password ='" . $password ."'";
+        $sql_query = "SELECT `id`,`name`,`email`,`password`, `twitter` FROM `users` WHERE email ='" . $email . "' AND password ='" . $password ."'";
 
         return $this->runSQL($sql_query);
 
@@ -53,10 +53,10 @@ class database{
     }
 
 
-     public
-    function delete_account($email){
+    public
+    function delete_account($username,$email){
 
-         $sql_query = "DELETE FROM users WHERE email='" . $email ."'";
+         $sql_query = "DELETE FROM users WHERE name='" . $username . "' AND email='" . $email ."'";
 
          $this->runSQL($sql_query);
 
@@ -65,22 +65,12 @@ class database{
     public
     function update_account($password,$twitter){
 
-        
-         $sql_query = "UPDATE users SET password='" . $password   ."' ,twitter='".  $twitter .  "' WHERE id='" . $_SESSION["ID"] . "'";
+        $sql_query = "UPDATE users SET password='" . $password   ."' ,twitter='".  $twitter .  "' WHERE id='" . $_SESSION["ID"] . "'";
 
          $this->runSQL($sql_query);
 
     }
 
-     public
-    function check_if_password_changed($password){
- 
-        $sql_query = "SELECT count(id) as count FROM `users` where password='" . $password   ."' and id='" . $_SESSION["ID"] . "'";
-        
-        $result =$this->runSQL($sql_query);
-        $count = mysqli_fetch_array($result);
-        return  $count[0];
-    }
 
     public
     function count_amount_of_users(){
@@ -135,6 +125,17 @@ class database{
         return  $count[0];
     }
     
+
+    public
+    function check_if_password_changed($password){
+ 
+        $sql_query = "SELECT count(id) as count FROM `users` where password='" . $password   ."' and id='" . $_SESSION["ID"] . "'";
+        
+        $result =$this->runSQL($sql_query);
+        $count = mysqli_fetch_array($result);
+        return  $count[0];
+    }
+
     
     public
     function runSQL($sql_query){

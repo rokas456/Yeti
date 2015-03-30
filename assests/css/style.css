@@ -11,6 +11,15 @@ height:70px;
 
 }
 
+#main--container{
+
+
+
+	margin-top: -80px;
+}
+#search--container{
+margin-bottom: 70px;
+}
 navbar-toggle {
 
 margin-top: 15px;
