@@ -12,6 +12,8 @@
         var $twitter;
         var $acctKey = 'ch5yPPgveyknb+HrsD0Gow1UV5znc7ukV32Kd3WULd4';
         var $rootUri = 'https://api.datamarket.azure.com/Bing/Search';
+        var $results = array();
+        var $duckduckgoResults;
 
         
         
@@ -36,9 +38,13 @@
         function add_search(){
             
             $search_Term = $_POST['search_bar_input'];
-            $this->bing($search_Term);
+           // $this->bing($search_Term);
             $this->duckduckgo($search_Term);
             $this->google($search_Term);
+                
+         //   $sorted_data = $this->orderBy($this->results, 'content');
+           // print_r($sorted_data );
+         //  print_r($this->results);
             $this->database->add_search($search_Term,$_SESSION['ID']);
 
             if ($_SESSION['twitter'] === '1'){
@@ -57,6 +63,17 @@
         }
 
 
+
+        public 
+        function renameKey(){
+
+            foreach ($this->duckduckgoResults->RelatedTopics[0] as $arr)
+            {
+              $arr['content'] = $arr['Text'];
+              unset($arr['Text']);
+            }
+
+        }
         public 
         function duckduckgo($search_Term){
             $requestUri = "http://api.duckduckgo.com/?q='$search_Term'&format=json";
@@ -64,15 +81,19 @@
             $response = file_get_contents($requestUri, 0);
 
             // Decode the response. 
-            $jsonObj = json_decode($response); 
+            $this->duckduckgoResults = json_decode($response); 
             $resultStr = ''; 
-     
-                $title = $jsonObj->Heading;
-                $url = $jsonObj->RelatedTopics[0]->FirstURL;
-               $text =$jsonObj->RelatedTopics[0]->Text;
+
+              //  $this->renameKey();     
+             //   array_push( $this->results,$this->duckduckgoResults);
+
+                $title = $this->duckduckgoResults->Heading;
+                $url = $this->duckduckgoResults->RelatedTopics[0]->FirstURL;
+                $text =$this->duckduckgoResults->RelatedTopics[0]->Text;
        
                         $resultStr .= "<ul class='nav nav-tabs nav-stacked well' ><li><h3><a href='".   $url .  "'>" . $title.   "</a></h3></li><li><h5><a href='".   $url .  "'>" .$url.   "</a></h5></li><li><p>" .  $text  .   "</p></li><li><span class='label label-warning'>DuckDuckGo</span></li></ul>" ; 
  
+          
           
             echo $resultStr;
 
@@ -88,20 +109,29 @@
 
             $body = file_get_contents($url,0);
             $json = json_decode($body);
-    $resultStr = '';
+            $resultStr = '';
             for($x=0;$x<count($json->responseData->results);$x++){
-            
-
+                
+                array_push( $this->results, $json->responseData->results[$x]);
                 $resultStr .= "<ul class='nav nav-tabs nav-stacked well' ><li><h3><a href='".   $json->responseData->results[$x]->url .  "'>" . $json->responseData->results[$x]->title.   "</a></h3></li><li><h5><a href='".    $json->responseData->results[$x]->visibleUrl .  "'>" . $json->responseData->results[$x]->visibleUrl.   "</a></h5></li><li><p>" .  $json->responseData->results[$x]->content  .   "</p></li><li><span class='label label-success'>Google</span></li></ul>" ; 
  
      
 
             }
 
+
             echo $resultStr;
 
         }
 
+
+        public
+        function orderBy($data, $field)
+        {
+            $code = "return strnatcmp(\$a['$field'], \$b['$field']);";
+            usort($data, create_function('$a,$b', $code));
+            return $data;
+        }
 
 
 
@@ -152,6 +182,7 @@
 
                 switch ($value->__metadata->type) { 
                     case 'WebResult': 
+                     //   array_push( $this->results,$value);
                         $resultStr .= "<ul class='nav nav-tabs nav-stacked well' ><li><h3><a href=\"{$value->Url}\">{$value->Title}</a></h3></li><li><h5><a href=\{$value->Url}\">{$value->Title}</a></h5></li><li><p>{$value->Description} </p></li><li><span class='label label-info'>Bing</span></li></ul>" ; 
                         break; 
                     case 'ImageResult':

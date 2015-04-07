@@ -1,12 +1,13 @@
 *{ 
 	margin: 0; 
 	padding: 0;
+	color:#707F8E;
 }
 
 body {
 
-	background-color: #F3F3F3;
-	border-top:2px solid #FFCE47;
+	background-color: #FFFFFF;
+	border-top:2px solid #FFFFFF;
 }
 
 .navbar-header{
@@ -16,8 +17,8 @@ body {
 }
 
 .navbar-default{
-border: 0px solid #4286F5;
-	background-color: #F3F3F3 !important;
+border: 0px solid #FAFAFA;
+	background-color: #FAFAFA !important;
 }
 
 navbar-toggle {

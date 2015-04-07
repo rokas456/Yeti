@@ -97,7 +97,7 @@ function signinedIn($actions)
                 include_once(WEBSITE_PATH . 'assests/view/results.html'); 
                 break;
             case 'webresults':
-                $this->search->bing();
+               // $this->search->bing();
                 $this->search->add_search();
                 break;
             default:
