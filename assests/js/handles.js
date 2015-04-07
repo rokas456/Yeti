@@ -1,5 +1,5 @@
 $(function() {
-picture();
+//picture();
 
   var url = '';
   // This is for the personal Settings
