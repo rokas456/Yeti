@@ -38,7 +38,7 @@
         function add_search(){
             
             $search_Term = $_POST['search_bar_input'];
-           // $this->bing($search_Term);
+           $this->bing($search_Term);
             $this->duckduckgo($search_Term);
             $this->google($search_Term);
                 
