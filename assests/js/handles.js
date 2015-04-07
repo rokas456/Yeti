@@ -1,5 +1,5 @@
 $(function() {
-
+picture();
 
   var url = '';
   // This is for the personal Settings
@@ -125,6 +125,12 @@ $(function() {
     }
   }
 
+
+  function picture(){
+
+    document.getElementById("webresults").innerHTML = "<div id='searchEmpty' ><img src='assests/img/search.png' alt='The Image' width='128' height='128' /> <h1>No Searches :(</h1></div>";
+
+  }
 
   function myFunction(data) {
     document.getElementById("webresults").innerHTML = data;

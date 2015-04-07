@@ -11,6 +11,13 @@ body {
 	background-color:#ebebeb;
 	border-top:2px solid #4285F4
 }
+#searchEmpty{
+margin-left: auto;
+margin-right: auto;
+width:130px;
+height: 180px;
+text-align: center;
+}
 
 .cloud>p {
 	z-index:9999;
