@@ -178,18 +178,20 @@
             $jsonObj = json_decode($response); 
             $resultStr = ''; 
             // Parse each result according to its metadata type. 
-            foreach($jsonObj->d->results as $value) { 
 
-                switch ($value->__metadata->type) { 
+            for ($i=0; $i < 6; $i++) { 
+           
+                switch ($jsonObj->d->results[$i]->__metadata->type) { 
                     case 'WebResult': 
                      //   array_push( $this->results,$value);
-                        $resultStr .= "<ul class='nav nav-tabs nav-stacked well' ><li><h3><a href=\"{$value->Url}\">{$value->Title}</a></h3></li><li><h5><a href=\{$value->Url}\">{$value->Title}</a></h5></li><li><p>{$value->Description} </p></li><li><span class='label label-info'>Bing</span></li></ul>" ; 
+                        $resultStr .= "<ul class='nav nav-tabs nav-stacked well' ><li><h3><a href=\"{$jsonObj->d->results[$i]->Url}\">{$jsonObj->d->results[$i]->Title}</a></h3></li><li><h5><a href=\{$jsonObj->d->results[$i]->Url}\">{$jsonObj->d->results[$i]->Title}</a></h5></li><li><p>{$jsonObj->d->results[$i]->Description} </p></li><li><span class='label label-info'>Bing</span></li></ul>" ; 
                         break; 
                     case 'ImageResult':
-                        $resultStr .= "<h4>{$value->Title} ({$value->Width}x{$value->Height}) " . "{$value->FileSize} bytes)</h4>" . "<a href=\"{$value->MediaUrl}\">" . "<img src=\"{$value->Thumbnail->MediaUrl}\"></a><br />"; 
+                        $resultStr .= "<h4>{$jsonObj->d->results[$i]->Title} ({$jsonObj->d->results[$i]->Width}x{$jsonObj->d->results[$i]->Height}) " . "{$jsonObj->d->results[$i]->FileSize} bytes)</h4>" . "<a href=\"{$jsonObj->d->results[$i]->MediaUrl}\">" . "<img src=\"{$jsonObj->d->results[$i]->Thumbnail->MediaUrl}\"></a><br />"; 
                         break; 
                     } 
-                } 
+            }
+
 
             // Substitute the results placeholder. Ready to go. 
            // $contents = str_replace('{RESULTS}', $resultStr, $contents);
