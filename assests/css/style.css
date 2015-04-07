@@ -2,31 +2,35 @@
 	margin:0;
 	padding:0
 }
-.navbar-default .navbar-nav > li > a{
 
-	color: white !important;
+.navbar-default .navbar-nav > li > a {
+	color:#fff!important
 }
 
 body {
 	background-color:#ebebeb;
 	border-top:2px solid #4285F4
 }
-.cloud>p{
- z-index: 9999;
- margin-left: auto;
- margin-right: auto;
- width:200px;
- text-align: center;
- position: absolute;
 
+.cloud>p {
+	z-index:9999;
+	margin-left:auto;
+	margin-right:auto;
+	width:200px;
+	text-align:center;
+	position:absolute
 }
-.navbar-form{
 
-margin-right: 0px; 
- margin-bottom: 0px; 
- margin-left: 0px; 
-
+.navbar-form {
+	margin-right:0;
+	margin-bottom:0;
+	margin-left:0;
+	border-top:0 solid transparent;
+	border-bottom:0 solid transparent;
+	-webkit-box-shadow:inset 0 0 0 rgba(255,255,255,.1),0 0 0 rgba(255,255,255,.1);
+	box-shadow:inset 0 0 0 rgba(255,255,255,.1),0 0 0 rgba(255,255,255,.1)
 }
+
 .navbar-default .navbar-toggle {
 	border-color:#4285F4;
 	color:#fff
@@ -43,23 +47,20 @@ margin-right: 0px;
 .navbar-default {
 	border-radius:0;
 	border:0 solid #4285F4;
-	background-color:#4285F4!important;
-
+	background-color:#4285F4!important
 }
-.form-control{
-color: black;
 
+.form-control {
+	color:#000
 }
-.well{	
 
- box-shadow:0 2px 5px 0 #EBEBEB;
- margin-bottom: 0px; 
- border:1px solid #EBEBEB;
-
- background-color: #EBEBEB; 	
-
-box-shadow: inset 0 1px 1px #EBEBEB!important;
-	box-shadow:0 2px 5px 0 #EBEBEB!important;
+.well {
+	box-shadow:0 2px 5px 0 #EBEBEB;
+	margin-bottom:0;
+	border:1px solid #EBEBEB;
+	background-color:#EBEBEB;
+	box-shadow:inset 0 1px 1px #EBEBEB!important;
+	box-shadow:0 2px 5px 0 #EBEBEB!important
 }
 
 navbar-toggle {

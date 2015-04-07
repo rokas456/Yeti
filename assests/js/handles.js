@@ -1,7 +1,6 @@
 $(function() {
 
 
-
   var url = '';
   // This is for the personal Settings
   $("#signin").submit(function() {
@@ -43,18 +42,14 @@ $(function() {
   });
 
 
+
   // This is for the personal Settings
   $("#search_bar2").submit(function() {
-    
     alert('test');
     var url = "index.php?q=" + jQuery("#search_bar_input").val(); // the script where you handle the form input.
-
-      window.location = url;
+    window.location = url;
     return false; // avoid to execute the actual submit of the form.
   });
-
-
-
 
 
   // This is for the personal Settings
@@ -90,7 +85,6 @@ $(function() {
   });
 
 
-
   // This is for the personal Settings
   $("#update_account").submit(function() {
     var url = "index.php?action=update_account"; // the script where you handle the form input.
@@ -105,7 +99,6 @@ $(function() {
     });
     return false; // avoid to execute the actual submit of the form.
   });
-
 
 
   function alerts(status, message) {
@@ -133,11 +126,9 @@ $(function() {
   }
 
 
-
   function myFunction(data) {
     document.getElementById("webresults").innerHTML = data;
   }
-
 
 
   function redirect() {
