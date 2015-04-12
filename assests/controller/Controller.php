@@ -22,7 +22,7 @@ class Controller {
         $this->search = new search();
         $this->database = new database();
         $this->states = new states();
-   //  $this->showErrors();
+   //   $this->showErrors();
     }
 
 

@@ -155,19 +155,7 @@
 
             $auth = base64_encode("$this->acctKey:$this->acctKey");
 
-            $data = array(
-
-            'http' => array(
-
-            'request_fulluri' => true,
-
-            // ignore_errors can help debug – remove for production. This option added in PHP 5.2.10
-
-            'ignore_errors' => true,
-
-            'header' => "Authorization: Basic $auth")
-
-            );
+            $data = array('http' => array('request_fulluri' => true,'ignore_errors' => true,'header' => "Authorization: Basic $auth"));
 
             $context = stream_context_create($data);
 
@@ -193,20 +181,22 @@
                     } 
                 } 
 
-            // Substitute the results placeholder. Ready to go. 
            // $contents = str_replace('{RESULTS}', $resultStr, $contents);
-
-          
-
-        // echo $resultStr;
 
         }
 
+
+    public
+    function search_Session(){
+
+
+    }
 
 
     public 
     function displayResults($arr){
 
+        var $temp = '';
         shuffle($arr);
         foreach ($arr as &$value) {
             echo $value;

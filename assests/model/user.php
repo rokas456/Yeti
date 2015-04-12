@@ -128,11 +128,22 @@
             $twitter =  $_POST["shareT"];
             $this->database->update_account($password,$twitter);
             $wasItChanged =  $this->database->check_if_password_changed($password);
+            $this->updateTwitter_Session($_POST["shareT"]);
             if ($wasItChanged != '1' ){
                 echo 'error';
             } else {
+
                 echo 'passwordchanged';
             }
         }
+
+        public 
+        function updateTwitter_Session($twitter){
+        
+            $_SESSION["twitter"] =  $twitter;
+
+        }
+
+
     }
     ?>
