@@ -2,6 +2,7 @@
 
     include_once("database.php");
     include_once("assests/third-party/twitter/twitter.php");
+
 // -- Class Name : search
 // -- Purpose : 
 // -- Created On : 
@@ -38,18 +39,19 @@
         function add_search(){
             
             $search_Term = $_POST['search_bar_input'];
-           $this->bing($search_Term);
+            $this->bing($search_Term);
             $this->duckduckgo($search_Term);
             $this->google($search_Term);
                 
-         //   $sorted_data = $this->orderBy($this->results, 'content');
-           // print_r($sorted_data );
-         //  print_r($this->results);
+     
             $this->database->add_search($search_Term,$_SESSION['ID']);
 
+            $this->displayResults($this->results);
+       
             if ($_SESSION['twitter'] === '1'){
 
-                    $this->post_twitter();
+                $this->post_twitter();
+            
             }
             
         }
@@ -66,14 +68,13 @@
 
         public 
         function renameKey(){
-
             foreach ($this->duckduckgoResults->RelatedTopics[0] as $arr)
             {
               $arr['content'] = $arr['Text'];
               unset($arr['Text']);
             }
-
         }
+
         public 
         function duckduckgo($search_Term){
             $requestUri = "http://api.duckduckgo.com/?q='$search_Term'&format=json";
@@ -85,7 +86,7 @@
             $resultStr = ''; 
 
               //  $this->renameKey();     
-             //   array_push( $this->results,$this->duckduckgoResults);
+             
 
                 $title = $this->duckduckgoResults->Heading;
                 $url = $this->duckduckgoResults->RelatedTopics[0]->FirstURL;
@@ -93,9 +94,9 @@
        
                         $resultStr .= "<ul class='nav nav-tabs nav-stacked well fadeIn' ><li><h3><a href='".   $url .  "'>" . $title.   "</a></h3></li><li><h5><a href='".   $url .  "'>" .$url.   "</a></h5></li><li><p>" .  $text  .   "</p></li><li><span class='label label-warning'>DuckDuckGo</span></li></ul>" ; 
  
+                        array_push( $this->results,$resultStr);
           
-          
-            echo $resultStr;
+          //  echo $resultStr;
 
         }
 
@@ -111,16 +112,14 @@
             $json = json_decode($body);
             $resultStr = '';
             for($x=0;$x<count($json->responseData->results);$x++){
-                
-                array_push( $this->results, $json->responseData->results[$x]);
+                      
                 $resultStr .= "<ul class='nav nav-tabs nav-stacked well fadeIn' ><li><h3><a href='".   $json->responseData->results[$x]->url .  "'>" . $json->responseData->results[$x]->title.   "</a></h3></li><li><h5><a href='".    $json->responseData->results[$x]->visibleUrl .  "'>" . $json->responseData->results[$x]->visibleUrl.   "</a></h5></li><li><p>" .  $json->responseData->results[$x]->content  .   "</p></li><li><span class='label label-success'>Google</span></li></ul>" ; 
- 
-     
-
+                array_push( $this->results, $resultStr );
+    
             }
 
 
-            echo $resultStr;
+          //  echo $resultStr;
 
         }
 
@@ -128,9 +127,11 @@
         public
         function orderBy($data, $field)
         {
+
             $code = "return strnatcmp(\$a['$field'], \$b['$field']);";
             usort($data, create_function('$a,$b', $code));
             return $data;
+
         }
 
 
@@ -182,8 +183,9 @@
 
                 switch ($value->__metadata->type) { 
                     case 'WebResult': 
-                     //   array_push( $this->results,$value);
+                
                         $resultStr .= "<ul class='nav nav-tabs nav-stacked well fadeIn' ><li><h3><a href=\"{$value->Url}\">{$value->Title}</a></h3></li><li><h5><a href=\{$value->Url}\">{$value->Title}</a></h5></li><li><p>{$value->Description} </p></li><li><span class='label label-info'>Bing</span></li></ul>" ; 
+                                array_push( $this->results,$resultStr);
                         break; 
                     case 'ImageResult':
                         $resultStr .= "<h4>{$value->Title} ({$value->Width}x{$value->Height}) " . "{$value->FileSize} bytes)</h4>" . "<a href=\"{$value->MediaUrl}\">" . "<img src=\"{$value->Thumbnail->MediaUrl}\"></a><br />"; 
@@ -196,9 +198,21 @@
 
           
 
-         echo $resultStr;
+        // echo $resultStr;
 
         }
+
+
+
+    public 
+    function displayResults($arr){
+
+        shuffle($arr);
+        foreach ($arr as &$value) {
+            echo $value;
+        }   
+
+    } 
 
 
     }
