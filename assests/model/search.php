@@ -16,6 +16,7 @@
         var $results = array();
         var $duckduckgoResults;
         var $bingSearchResultsLimit = 5; 
+        var $images = '';
         
         
         
@@ -39,7 +40,8 @@
         function add_search(){
             
             $search_Term = $_POST['search_bar_input'];
-            $this->bing($search_Term);
+            $this->bing('Image');
+            $this->bing('Web');
             $this->duckduckgo($search_Term);
             $this->google($search_Term);
                 
@@ -139,13 +141,13 @@
 
 
         public
-        function bing(){
+        function bing($type){
 
             // Encode the query and the single quotes that must surround it.
             $query = urlencode("'{$_POST['search_bar_input']}'");
 
             // Get the selected service operation (Web or Image).
-            $serviceOp = 'Web';
+            $serviceOp = $type;
 
             // Construct the full URI for the query.
             $requestUri = "$this->rootUri/$serviceOp?\$format=json&Query='$query'" . "&\$top=" . $this->bingSearchResultsLimit;
@@ -173,10 +175,12 @@
                     case 'WebResult': 
                 
                         $resultStr = "<ul class='nav nav-tabs nav-stacked well fadeIn' ><li><h3><a href=\"{$value->Url}\">{$value->Title}</a></h3></li><li><h5><a href=\{$value->Url}\">{$value->Title}</a></h5></li><li><p>{$value->Description} </p></li><li><span class='label label-info'>Bing</span></li></ul>" ; 
-                                array_push( $this->results,$resultStr);
+                        array_push( $this->results,$resultStr);
+                        
                         break; 
                     case 'ImageResult':
-                        $resultStr = "<h4>{$value->Title} ({$value->Width}x{$value->Height}) " . "{$value->FileSize} bytes)</h4>" . "<a href=\"{$value->MediaUrl}\">" . "<img src=\"{$value->Thumbnail->MediaUrl}\"></a><br />"; 
+                        $resultStr = "<h4>{$value->Title} ({$value->Width}x{$value->Height}) " . "{$value->FileSize} bytes)</h4>" . "<li><div class='col-xs-6 col-md-3'><a class='test' href=\"{$value->MediaUrl}\">" . "<img src=\"{$value->Thumbnail->MediaUrl}\"></a></div></li>"; 
+                        array_push( $this->images,$resultStr);
                         break; 
                     } 
                 } 
