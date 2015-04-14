@@ -40,8 +40,7 @@
         function add_search(){
             
             $search_Term = $_POST['search_bar_input'];
-            $this->bing('Image');
-            $this->bing('Web');
+            $this->bing('Web',$search_Term);
             $this->duckduckgo($search_Term);
             $this->google($search_Term);
                 
@@ -141,10 +140,10 @@
 
 
         public
-        function bing($type){
+        function bing($type,$search_Term){
 
             // Encode the query and the single quotes that must surround it.
-            $query = urlencode("'{$_POST['search_bar_input']}'");
+            $query = urlencode("'{$search_Term}'");
 
             // Get the selected service operation (Web or Image).
             $serviceOp = $type;
