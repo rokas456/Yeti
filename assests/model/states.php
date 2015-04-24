@@ -15,11 +15,11 @@
             $this->database =  new database();
         }
 
-        public
 
 // -- Function Name : search_chart
 // -- Params : 
 // -- Purpose : Gets the amount of search from the database and displays them in highcharts
+        public
         function search_chart(){
             $i = 0;
             $result =   $this->database->amount_of_searches();
