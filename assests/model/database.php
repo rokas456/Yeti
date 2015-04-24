@@ -1,9 +1,10 @@
 <?php
 
     // -- Class Name : database
-    // -- Purpose : 
-    // -- Created On : 
+    // -- Purpose : To Connect and run sql querys to the database 
+    // -- Created On : 21/03/2015
     class database{
+
         var $username = "root";
         var $password= "";
         var $host = "localhost";
@@ -12,14 +13,17 @@
         
 
 // -- Function Name : __construct
-// -- Params : 
-// -- Purpose : 
+// -- Params : None
+// -- Purpose : Starts the sql connect
         public
         function __construct()   {
             $this->con=mysqli_connect($this->host,$this->username,$this->password,$this->database);
             
             if (mysqli_connect_errno()) {
                 echo "Failed to connect to MySQL: " . mysqli_connect_error();
+            } else {
+
+                echo 'Why is mysql dead :( ';
             }
 
         }
@@ -27,7 +31,7 @@
 
 // -- Function Name : __destruct
 // -- Params : 
-// -- Purpose : 
+// -- Purpose : Stops the sql connect to the database
         public
         function __destruct(){
             mysqli_close($this->con);
