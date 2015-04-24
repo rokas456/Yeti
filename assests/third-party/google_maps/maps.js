@@ -1,4 +1,3 @@
-
 // Note: This example requires that you consent to location sharing when
 // prompted by your browser. If you see a blank space instead of the map, this
 // is probably because you have denied permission for location sharing.
@@ -7,16 +6,16 @@ var map;
 
 function initialize() {
   var mapOptions = {
-    zoom:11
+    zoom: 11
   };
   map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
+    mapOptions);
 
   // Try HTML5 geolocation
-  if(navigator.geolocation) {
+  if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = new google.maps.LatLng(position.coords.latitude,
-                                       position.coords.longitude);
+        position.coords.longitude);
 
       var infowindow = new google.maps.InfoWindow({
         map: map,
