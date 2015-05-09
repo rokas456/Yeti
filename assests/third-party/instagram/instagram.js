@@ -32,7 +32,7 @@ function onDataLoaded(instagram_data) {
             for (var key in photos) {
                 var photo = photos[key];
                 target.append('<li><div class="col-xs-6 col-md-3"><a href="' + photo.link +
-                    '" class="test"><img src="' + photo.images.thumbnail.url +
+                    '" class="test"><img class="shadow-z-1" src="' + photo.images.thumbnail.url +
                     '" alt="jj"></a></div></li>')
             }
         } else {

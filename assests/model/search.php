@@ -148,7 +148,7 @@
             foreach($jsonObj->d->results as $value) {
                 switch ($value->__metadata->type) {
                     case 'WebResult':
-                        $resultStr = "<li><div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'><a href=\"{$value->Url}\">{$value->Title}</a></h3></div><div class='panel-body'><h5><a href=\{$value->Url}\">{$value->Title}</a></h5><p>{$value->Description}</p><span class='label label-info'>Bing</span></li>    </div></div></ul>" ;
+                        $resultStr = "<ul class='nav nav-tabs nav-stacked well' ><div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'><a href=\"{$value->Url}\">{$value->Title}</a></h3></div><div class='panel-body'><h5><a href=\{$value->Url}\">{$value->Title}</a></h5><p>{$value->Description}</p><span class='label label-info'>Bing</span></li>    </div></div></ul>" ;
                         array_push( $this->results,$resultStr);
                         break;
                     case 'ImageResult':
