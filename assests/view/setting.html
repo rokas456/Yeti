@@ -56,102 +56,64 @@
   </nav>
 
 
-  <div class="container-fluid">
+
+  <div class="container-fluid main">
+
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-xs-3"> 
+
       </div>
-
-
-      <div class="col-sm-4">
+      <div class="col-xs-6"> 
         <div class="row">
-          <div class="col-sm-12">
-            <form class="form-horizontal" id="update_account"
-            method="post" name='settings'>
-              <div class="form-group">
-                <h1 class="">Settings</h1>
+          <form class="form-horizontal" id="update_account" method="post" name='settings'>
+            <div class="form-group">
+              <h1>Settings</h1>
+              <div class="divider"></div>
+            </div>
+            <div class="form-group" id="alert"></div>
+            <div class="form-group radio">
+              <h3>Share Results on Twitter  <i class="mdi-action-favorite mdi-material-red"></i></h3>
+              <label><input name="shareT" type="radio" value="1">Yes</label> 
+              <label><input name="shareT" type="radio" value="0">Nope</label>
+            </div>
 
+            <div class="form-group">
+              <h3>Change Password</h3>
+                <input type="password"  name ="password" class="form-control" value="<?php echo $_SESSION["password"]; ?>" placeholder="Password" id="pwd">
+            </div>
 
-                <div class="divider">
-                </div>
-              </div>
+            <div class="form-group">
+            <button class="btn btn-success" id="btnSubmit" name="btnSubmit" type="submit">Save</button>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <form class="form-horizontal" id="delete_account" method="post" name='settings'>
+            <div class="form-group">
+              <h2 class="">Delete Account</h2>
+              <p>This cannot be undone</p>
+            </div>
 
+            <div class="form-group" id="alert"></div>
 
-              <div class="form-group" id="alert">
-              </div>
+            <div class="form-group"></div>
 
-
-              <div class="form-group radio">
-                <h3>Share Results on Twitter&lt;3</h3>
-                <label><input name="shareT" type="radio" value=
-                "1">Yes</label> <label><input name="shareT"
-                type="radio" value="0">Nope</label>
-              </div>
-
-
-              <div class="form-group">
-                <h3>Change Password</h3>
-                     <input type="password"  name ="password" class="form-control" value="<?php echo $_SESSION["password"]; ?>" placeholder="Password" id="pwd">
-              </div>
-
-
-              <div class="form-group">
-              </div>
-
-
-              <div class="form-group">
-                <input class="btn btn-success btn-lg" id=
-                "btnSubmit" name="btnSubmit" type="submit"
-                value="Save">
-              </div>
-            </form>
-          </div>
-
-
-          <div class="col-sm-12">
-            <form class="form-horizontal" id="delete_account"
-            method="post" name='settings'>
-              <div class="form-group">
-                <h2 class="">Delete Account</h2>
-
-
-                <p>This cannot be undone</p>
-              </div>
-
-
-              <div class="form-group" id="alert">
-              </div>
-
-
-              <div class="form-group">
-              </div>
-
-
-              <div class="form-group">
-                <input class="btn btn-danger btn-lg" id=
-                "btnSubmit" name="btnSubmit" type="submit"
-                value="Delete Account">
-              </div>
-            </form>
-          </div>
+            <div class="form-group">
+              <button class="btn btn-danger" id="btnSubmit" name="btnSubmit" type="submit"> Delete Account</button>
+            </div>
+          </form>
         </div>
       </div>
 
+       
+      </div>
+      <div class="col-xs-3"> 
 
-      <div class="col-sm-4">
       </div>
     </div>
-  </div>
+    </div>
 
-
-
-
-
-
-
-
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   <script src="assests/js/ripples.min.js"></script>
   <script src="assests/js/material.min.js"></script>

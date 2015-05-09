@@ -103,7 +103,7 @@
             $json = json_decode($body);
             $resultStr = '';
             for($x=0;$x<count($json->responseData->results);$x++){
-                $resultStr = "<ul class='nav nav-tabs nav-stacked well' ><li><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'><a href='".   $json->responseData->results[$x]->url .  "'>" . $json->responseData->results[$x]->title.   "</a></h3></div><div class='panel-body'><h5><a href='".    $json->responseData->results[$x]->visibleUrl .  "'>" . $json->responseData->results[$x]->visibleUrl.   "</a></h5><p>" .  $json->responseData->results[$x]->content  .   "</p><span class='label label-success'>Google</span></li>    </div></div></ul>" ;
+                $resultStr = "<ul class='nav nav-tabs nav-stacked well' ><li><div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'><a href='".   $json->responseData->results[$x]->url .  "'>" . $json->responseData->results[$x]->title.   "</a></h3></div><div class='panel-body'><h5><a href='".    $json->responseData->results[$x]->visibleUrl .  "'>" . $json->responseData->results[$x]->visibleUrl.   "</a></h5><p>" .  $json->responseData->results[$x]->content  .   "</p><span class='label label-success'>Google</span></li>    </div></div></ul>" ;
                 array_push( $this->results, $resultStr );
             }
 
@@ -148,7 +148,7 @@
             foreach($jsonObj->d->results as $value) {
                 switch ($value->__metadata->type) {
                     case 'WebResult':
-                        $resultStr = "<ul class='nav nav-tabs nav-stacked well' ><div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'><a href=\"{$value->Url}\">{$value->Title}</a></h3></div><div class='panel-body'><h5><a href=\{$value->Url}\">{$value->Title}</a></h5><p>{$value->Description}</p><span class='label label-info'>Bing</span></li>    </div></div></ul>" ;
+                        $resultStr = "<ul class='nav nav-tabs nav-stacked well' ><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'><a href=\"{$value->Url}\">{$value->Title}</a></h3></div><div class='panel-body'><h5><a href=\{$value->Url}\">{$value->Title}</a></h5><p>{$value->Description}</p><span class='label label-info'>Bing</span></li>    </div></div></ul>" ;
                         array_push( $this->results,$resultStr);
                         break;
                     case 'ImageResult':
