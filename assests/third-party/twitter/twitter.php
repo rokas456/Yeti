@@ -32,7 +32,7 @@
             // Create object
             $tweet = new TwitterOAuth($this->consumerKey, $this->consumerSecret, $this->accessToken, $this->accessTokenSecret);
             // Set status message
-            $tweetMessage = '"' . $message . '" was just searched using Yeti #yetisearch';
+            $tweetMessage = '"' . $message . '" was just searched using WootBuddy #WootBuddy';
             // Check for 140 characters
             
             if(strlen($tweetMessage) <= 140)                {
