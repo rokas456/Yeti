@@ -4,6 +4,7 @@ $(function() {
   var url = '';
   // This is for the personal Settings
   $("#signin").submit(function() {
+
     var url = "index.php?action=signin"; // the script where you handle the form input.
     $.ajax({
       type: "POST",
@@ -105,22 +106,40 @@ $(function() {
     $("#alert >div").remove();
     if (status == 'true') {
       var div = document.createElement("div");
-      div.setAttribute("class", "alert alert-success");
-      div.setAttribute("role", "alert");
-      div.innerHTML = "Awesome, Hold on two seconds " + message;
+          div.setAttribute("class", "alert alert-dismissable alert-success");
+          div.setAttribute("role", "alert");
+          div.setAttribute("id", "alertDiv");
+          div.innerHTML = "Awesome, Hold on two seconds " + message;
+      var button = document.createElement("button");
+          button.setAttribute("type", "button");
+          button.setAttribute("class", "close");
+          button.setAttribute("data-dismiss", "alert");
+          button.innerHTML = "x";
+          div.appendChild(button);
       document.getElementById("alert").appendChild(div);
       setTimeout(redirect, 2000);
+
+
     } else if (status == 'error') {
       var div = document.createElement("div");
-      div.setAttribute("class", "alert alert-danger");
-      div.setAttribute("role", "alert");
-      div.innerHTML = "Oh snap something is wrong ";
+          div.setAttribute("class", "alert alert-dismissable alert-danger");
+          div.setAttribute("role", "alert");
+          div.setAttribute("id", "alert");
+          div.innerHTML = "Oh snap something is wrong ";
       document.getElementById("alert").appendChild(div);
+
     } else if (status == 'passwordchanged') {
       var div = document.createElement("div");
-      div.setAttribute("class", "alert alert-success");
-      div.setAttribute("role", "alert");
-      div.innerHTML = "Password Change Successful";
+          div.setAttribute("class", "alert alert-dismissable alert-success");
+          div.setAttribute("role", "alert");
+          div.setAttribute("id", "alertDiv");
+          div.innerHTML = "Password Change Successful";
+      var button = document.createElement("button");
+          button.setAttribute("type", "button");
+          button.setAttribute("class", "close");
+          button.setAttribute("data-dismiss", "alert");
+          button.innerHTML = "x";
+          div.appendChild(button);
       document.getElementById("alert").appendChild(div);
     }
   }
