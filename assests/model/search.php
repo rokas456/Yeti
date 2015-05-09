@@ -85,7 +85,7 @@
             $title = $this->duckduckgoResults->Heading;
             $url = $this->duckduckgoResults->RelatedTopics[0]->FirstURL;
             $text =$this->duckduckgoResults->RelatedTopics[0]->Text;
-            $resultStr .= "<ul class='nav nav-tabs nav-stacked well fadeIn' ><li><h3><a href='".   $url .  "'>" . $title.   "</a></h3></li><li><h5><a href='".   $url .  "'>" .$url.   "</a></h5></li><li><p>" .  $text  .   "</p></li><li><span class='label label-warning'>DuckDuckGo</span></li></ul>" ;
+            $resultStr .= "<ul class='nav nav-tabs nav-stacked well fadeIn' ><li><div class='panel panel-warning'><div class='panel-heading'><h3 class='panel-title'><a href='".   $url .  "'>" . $title.   "</a></h3></div><div class='panel-body'><h5><a href='".   $url .  "'>" .$url.   "</a></h5><p>" .  $text  .   "</p><span class='label label-warning'>DuckDuckGo</span></li></div></div></ul>" ;
             array_push( $this->results,$resultStr); // Adds the search to the array for sorting later.
             //  echo $resultStr;
         }
@@ -103,9 +103,10 @@
             $json = json_decode($body);
             $resultStr = '';
             for($x=0;$x<count($json->responseData->results);$x++){
-                $resultStr = "<ul class='nav nav-tabs nav-stacked well fadeIn' ><li><h3><a href='".   $json->responseData->results[$x]->url .  "'>" . $json->responseData->results[$x]->title.   "</a></h3></li><li><h5><a href='".    $json->responseData->results[$x]->visibleUrl .  "'>" . $json->responseData->results[$x]->visibleUrl.   "</a></h5></li><li><p>" .  $json->responseData->results[$x]->content  .   "</p></li><li><span class='label label-success'>Google</span></li></ul>" ;
+                $resultStr = "<ul class='nav nav-tabs nav-stacked well' ><li><div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'><a href='".   $json->responseData->results[$x]->url .  "'>" . $json->responseData->results[$x]->title.   "</a></h3></div><div class='panel-body'><h5><a href='".    $json->responseData->results[$x]->visibleUrl .  "'>" . $json->responseData->results[$x]->visibleUrl.   "</a></h5><p>" .  $json->responseData->results[$x]->content  .   "</p><span class='label label-success'>Google</span></li>    </div></div></ul>" ;
                 array_push( $this->results, $resultStr );
             }
+
 
             //  echo $resultStr;
         }
@@ -147,7 +148,7 @@
             foreach($jsonObj->d->results as $value) {
                 switch ($value->__metadata->type) {
                     case 'WebResult':
-                        $resultStr = "<ul class='nav nav-tabs nav-stacked well fadeIn' ><li><h3><a href=\"{$value->Url}\">{$value->Title}</a></h3></li><li><h5><a href=\{$value->Url}\">{$value->Title}</a></h5></li><li><p>{$value->Description}</p></li><li><span class='label label-info'>Bing</span></li></ul>" ;
+                        $resultStr = "<li><div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'><a href=\"{$value->Url}\">{$value->Title}</a></h3></div><div class='panel-body'><h5><a href=\{$value->Url}\">{$value->Title}</a></h5><p>{$value->Description}</p><span class='label label-info'>Bing</span></li>    </div></div></ul>" ;
                         array_push( $this->results,$resultStr);
                         break;
                     case 'ImageResult':

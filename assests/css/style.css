@@ -19,6 +19,10 @@ body {
 	height:180px;
 	text-align:center
 }
+.panel-title a:hover {
+
+	color: white !important;
+}
 
 .cloud>p {
 	z-index:9999;
@@ -61,14 +65,18 @@ body {
 .form-control {
 	color:#000
 }
+body .well, .container{
 
+	background-color: #F9F9F9 !important;
+	box-shadow: 0 0px 0px 0 #F9F9F9!important;
+}
 .well {
-	box-shadow:0 2px 5px 0 #EBEBEB;
+	box-shadow:0 0px 0px 0 #EBEBEB;
 	margin-bottom:0;
-	border:1px solid #EBEBEB;
+	border:0px solid #EBEBEB;
 	background-color:#EBEBEB;
-	box-shadow:inset 0 1px 1px #EBEBEB!important;
-	box-shadow:0 2px 5px 0 #EBEBEB!important
+	box-shadow:inset 0 0px 0px #EBEBEB!important;
+	box-shadow:0 0px 0px 0 #EBEBEB!important
 }
 
 navbar-toggle {
