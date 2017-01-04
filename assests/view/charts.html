@@ -1,58 +1,77 @@
-<htmL>
+<!DOCTYPE html>
+<html>
 <head>
-
-	<title>Chart</title>
-
-	<link rel="stylesheet" href="assests/css/bootstrap.css" type="text/css">
-	    <link rel="stylesheet" href="assests/css/style.css" type="text/css">
-    <script src="assests/js/jquery.min.js"></script>   
-	<script  src="assests/js/bootstrap.js"></script>
-    <script  src="assests/js/handles.js" ></script>
-  <script  src="assests/third-party/highcharts/highcharts.js"></script>
-     <script  src="assests/third-party/highcharts/exporting.js"></script>
-       <script  src="assests/third-party/highcharts/data.js"></script>
-  
+  <title>Chart</title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assests/css/roboto.min.css" rel="stylesheet">
+  <link href="assests/css/material.min.css" rel="stylesheet">
+  <link href="assests/css/ripples.min.css" rel="stylesheet">
+  <link href="assests/css/style.css" rel="stylesheet">
 </head>
 
 <body>
+  <nav class="navbar navbar-default header-panel shadow-z-2">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+
+
+      <div class="navbar-header">
+        <button class="navbar-toggle collapsed" data-target=
+        "#bs-example-navbar-collapse-1" data-toggle="collapse" type=
+        "button"><span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <span class="icon-bar"></span></button> <a class="navbar-brand"
+        href="index.php" rel="home" title=
+        "Buy Sell Rent Everyting"><img class=
+        "img-responive center-block" src="assests/img/logo.png" style=
+        "width:60px; height:60px; margin-top: -7px;"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+
+
+      <div class="collapse navbar-collapse" id=
+      "bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="index.php?action=charts"><span class=
+            "glyphicon glyphicon-stats"></span></a>
+          </li>
+
+
+          <li>
+            <a href="index.php?action=settings"><span class=
+            "glyphicon glyphicon-cog"></span></a>
+          </li>
+
+
+          <li>
+            <a href="index.php?action=logout"><span class=
+            "glyphicon glyphicon-log-out"></span></a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
 
 
 
+  <div class="container-fluid main">
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.php">Yeti</a>
+    <div class="row">
+      <div class="col-xs-3"> 
+
+      </div>
+      <div class="col-xs-6" id="chart"> 
+        
+      </div>
+      <div class="col-xs-3"> 
+
+      </div>
+    </div>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-   
-
-      <ul class="nav navbar-nav navbar-right">
-        <li>     
-
-             <form class="navbar-form navbar-left"  id="search_bar"  name="search_bar"role="search">
-       <div class="input-group">
-  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-  <input type="text" class="form-control" placeholder="Search" id="search_bar_input" aria-describedby="basic-addon1">
-</div>
-      </form>
-    </li>
-             <li><a href="index.php?action=charts"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span></a></li>
-          <li><a href="index.php?action=settings"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
-        <li><a href="index.php?action=logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
 
 
 
@@ -61,36 +80,36 @@
 
 
 
-<div class="container-fluid">
-
-  
-  <div class="row">
-    <div class="col-sm-1" style="background-color:red">
-    	
-    </div>
-    <div class="col-sm-10">
-     <div class="row" >
-        
-        <div class="col-sm-1"></div>
-           <div class="col-sm-10 thumbnail" id="chart"></div>
-           <div class="col-sm-1" ></div>
-        
-        </div>
-       
-        
-     </div>
-
-    <div class="col-sm-1" style="background-color:blue">
-     
-     </div>
-  </div>
 
 
-</div>
 
 
- 
-    
 
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="assests/js/ripples.min.js"></script>
+  <script src="assests/js/material.min.js"></script>
+  <script src="assests/js/handles.js"></script>
+  <script src="assests/third-party/highcharts/highcharts.js"></script>
+  <script src="assests/third-party/highcharts/exporting.js"></script>
+  <script src="assests/third-party/highcharts/data.js"></script>
+  <script>
+      $(document).ready(function() {
+          // This command is used to initialize some elements and make them work properly
+          $.material.init();
+      });
+  </script>
 </body>
 </html>
